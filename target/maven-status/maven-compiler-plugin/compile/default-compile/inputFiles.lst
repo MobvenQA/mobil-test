@@ -3,6 +3,7 @@
 /Users/hakantektas/mobil-test/src/main/java/com/flick/utils/ScreenshotHelper.java
 /Users/hakantektas/mobil-test/src/main/java/com/flick/utils/TestUtils.java
 /Users/hakantektas/mobil-test/src/main/java/com/flick/pages/TestFlightPage.java
+/Users/hakantektas/mobil-test/src/main/java/com/flick/pages/OnboardingPage.java
 /Users/hakantektas/mobil-test/src/main/java/com/flick/config/ConfigManager.java
 /Users/hakantektas/mobil-test/src/main/java/com/flick/App.java
 /Users/hakantektas/mobil-test/src/main/java/com/flick/capabilities/LocalCapabilities.java

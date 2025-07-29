@@ -20,15 +20,24 @@ public class TestFlightPage {
 
     private final IOSDriver driver;
     private final TestUtils utils;
-    private final String appName;
 
-    /**
-     * DriverFactory ve ConfigManager üzerinden otomatik driver & appName yüklenir.
-     */
+    // Artık appName sabit değil, gerektiğinde ConfigManager’dan alınır
+    private String appName;
+
     public TestFlightPage() {
         this.driver = (IOSDriver) DriverFactory.getDriver();
-        this.utils  = new TestUtils(); // DriverFactory ile otomatik bağlanır
-        this.appName = ConfigManager.getAppName(); // SuiteHooks appKey set ettiği için güvenilir
+        this.utils  = new TestUtils();
+    }
+
+    private String resolveAppName(String fallback) {
+        if (fallback != null && !fallback.isBlank()) return fallback;
+        try {
+            return ConfigManager.getAppName();
+        } catch (Exception e) {
+            LoggerHelper.log(LogLevel.WARN,
+                    "AppName alınamadı (ConfigManager): " + e.getMessage());
+            return "";
+        }
     }
 
     // Locators
@@ -44,48 +53,6 @@ public class TestFlightPage {
 
     // -------- İş Akışı Metodları --------
 
-    public void removeAppPhones() {
-        try {
-            Thread.sleep(1500);
-            List<By> editVariants = Arrays.asList(
-                    AppiumBy.xpath("(//*[contains(@name,'Edit') or contains(@label,'Edit') or contains(@value,'Edit')])[2]"),
-                    AppiumBy.xpath("(//*[contains(@name,'Edit') or contains(@label,'Edit') or contains(@value,'Edit')])[1]"),
-                    AppiumBy.accessibilityId("Edit Button")
-            );
-            utils.safeClickOneOf(editVariants, 10);
-
-            Thread.sleep(1500);
-            List<By> removeVariants = Arrays.asList(
-                    By.xpath("(//XCUIElementTypeImage[@name='minus.circle.fill'])[2]"),
-                    By.xpath("(//XCUIElementTypeImage[@name='remove'])[2]"),
-                    By.xpath("(//XCUIElementTypeCell)[6]"),
-                    By.xpath("(//*[contains(@name,'iPhone ')])[2]")
-            );
-            utils.safeClickOneOf(removeVariants, 10);
-
-            List<By> deleteVariants = Arrays.asList(
-                    By.xpath("//XCUIElementTypeStaticText[@name='Delete']"),
-                    AppiumBy.accessibilityId("Remove Button")
-            );
-            Thread.sleep(1500);
-            utils.safeClickOneOf(deleteVariants, 10);
-
-            utils.waitAndClick(By.xpath("//XCUIElementTypeOther[@name='Dismiss-Button']"), 5);
-
-            List<By> doneVariants = Arrays.asList(
-                    AppiumBy.accessibilityId("Done"),
-                    AppiumBy.accessibilityId("Done Button"),
-                    AppiumBy.xpath("(//XCUIElementTypeButton[@name='Done'])[2]"),
-                    AppiumBy.xpath("(//XCUIElementTypeButton[@name='Done'])[1]")
-            );
-            utils.safeClickOneOf(doneVariants, 10);
-
-            LoggerHelper.log(LogLevel.INFO, "✅ removeAppPhones işlemi tamamlandı.");
-        } catch (Exception e) {
-            LoggerHelper.log(LogLevel.ERROR, "❌ removeAppPhones işlemi başarısız: " + e.getMessage());
-        }
-    }
-
     @Step("openTestFlight")
     public void openTestFlight(String bundleId) {
         int maxRetries = 3;
@@ -94,11 +61,13 @@ public class TestFlightPage {
                 driver.terminateApp(bundleId);
                 Thread.sleep(1000);
                 driver.activateApp(bundleId);
-                new WebDriverWait(driver, Duration.ofSeconds(20)).until(d -> d.getPageSource() != null);
+                new WebDriverWait(driver, Duration.ofSeconds(20))
+                        .until(d -> d.getPageSource() != null);
                 ScreenshotHelper.captureAndAttach(driver, "openTestFlight", LogLevel.INFO);
                 return;
             } catch (Exception e) {
-                LoggerHelper.log(LogLevel.WARN, "❌ Retry " + retry + " failed: " + e.getMessage());
+                LoggerHelper.log(LogLevel.WARN,
+                        "❌ Retry " + retry + " failed: " + e.getMessage());
                 if (retry == maxRetries) throw new RuntimeException("openTestFlight failed", e);
                 try { Thread.sleep(2000); } catch (InterruptedException ignored) {}
             }
@@ -107,14 +76,14 @@ public class TestFlightPage {
 
     @Step("handlePermissions")
     public void handlePermissions() {
-        if (utils.waitUntilVisible(allowOnce, 5)) utils.waitAndClick(allowOnce, 5);
-        if (utils.waitUntilVisible(notNow, 5)) utils.waitAndClick(notNow, 5);
-        if (utils.waitUntilVisible(okBtn, 5)) utils.waitAndClick(okBtn, 5);
+        if (utils.waitUntilVisible(allowOnce, 1)) utils.waitAndClick(allowOnce, 1);
+        if (utils.waitUntilVisible(notNow, 1)) utils.waitAndClick(notNow, 1);
+        if (utils.waitUntilVisible(okBtn, 1)) utils.waitAndClick(okBtn, 1);
     }
 
     @Step("searchAndTapApp")
     public void searchAndTapApp(String appNameParam) throws Exception {
-        String targetAppName = appNameParam != null ? appNameParam : this.appName;
+        String targetAppName = resolveAppName(appNameParam);
         By appLocator = AppiumBy.accessibilityId(targetAppName);
         int maxScrolls = 5, currentScroll = 0;
         TestUtils.SwipeDirection direction = TestUtils.SwipeDirection.UP;
@@ -144,7 +113,7 @@ public class TestFlightPage {
 
     @Step("clickInstall")
     public void clickInstall() {
-        utils.waitAndClick(installBtn, 90);
+        utils.waitAndClick(installBtn, 30);
         try {
             By editButton = AppiumBy.xpath("//*[contains(@name,'Edit') or contains(@label,'Edit') or contains(@value,'Edit')]");
             if (utils.waitUntilVisible(editButton, 5)) {
@@ -156,8 +125,8 @@ public class TestFlightPage {
 
     @Step("waitForAndClickOpen")
     public void waitForAndClickOpen() throws Exception {
-        if (utils.waitUntilVisible(openBtn, 240)) {
-            utils.waitAndClick(openBtn, 2);
+        if (utils.waitUntilVisible(openBtn, 120)) {
+            utils.waitAndClick(openBtn, 120);
         } else {
             throw new Exception("❌ OPEN button not found.");
         }
@@ -165,7 +134,7 @@ public class TestFlightPage {
 
     @Step("verifyApp")
     public void verifyApp(String appNameParam) {
-        String targetAppName = appNameParam != null ? appNameParam : this.appName;
+        String targetAppName = resolveAppName(appNameParam);
         LoggerHelper.log(LogLevel.INFO, "Open App Verify...");
         utils.waitUntilVisible(AppiumBy.xpath("//*[contains(@name, '" + targetAppName + "')]"), 5);
     }
@@ -180,5 +149,49 @@ public class TestFlightPage {
         clickInstall();
         waitForAndClickOpen();
         verifyApp(appNameParam);
+    }
+
+    private void removeAppPhones() {
+        try {
+            Thread.sleep(1500);
+            List<By> editVariants = Arrays.asList(
+                    AppiumBy.xpath("(//*[contains(@name,'Edit') or contains(@label,'Edit') or contains(@value,'Edit')])[2]"),
+                    AppiumBy.xpath("(//*[contains(@name,'Edit') or contains(@label,'Edit') or contains(@value,'Edit')])[1]"),
+                    AppiumBy.accessibilityId("Edit Button")
+            );
+            utils.safeClickOneOf(editVariants, 10);
+            utils.safeClickOneOf(editVariants, 10);
+
+            Thread.sleep(1500);
+            List<By> removeVariants = Arrays.asList(
+                    By.xpath("(//XCUIElementTypeImage[@name='minus.circle.fill'])[2]"),
+                    By.xpath("(//XCUIElementTypeImage[@name='remove'])[2]"),
+                    By.xpath("(//XCUIElementTypeCell)[6]"),
+                    By.xpath("(//*[contains(@name,'iPhone ')])[2]")
+            );
+            utils.safeClickOneOf(removeVariants, 10);
+
+            List<By> deleteVariants = Arrays.asList(
+                    By.xpath("//XCUIElementTypeButton[@name='Delete']"),
+                    AppiumBy.accessibilityId("Remove Button")
+            );
+            Thread.sleep(1500);
+            utils.safeClickOneOf(deleteVariants, 10);
+
+            utils.waitAndClick(By.xpath("//XCUIElementTypeOther[@name='Dismiss-Button']"), 5);
+
+            List<By> doneVariants = Arrays.asList(
+                    AppiumBy.accessibilityId("Done"),
+                    AppiumBy.accessibilityId("Done Button"),
+                    AppiumBy.xpath("(//XCUIElementTypeButton[@name='Done'])[1]"),
+                    AppiumBy.xpath("(//XCUIElementTypeButton[@name='Done'])[2]")
+            );
+            utils.safeClickOneOf(doneVariants, 10);
+            utils.safeClickOneOf(doneVariants, 10);
+
+            LoggerHelper.log(LogLevel.INFO, "✅ removeAppPhones işlemi tamamlandı.");
+        } catch (Exception e) {
+            LoggerHelper.log(LogLevel.ERROR, "❌ removeAppPhones işlemi başarısız: " + e.getMessage());
+        }
     }
 }

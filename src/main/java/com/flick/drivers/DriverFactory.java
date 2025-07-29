@@ -11,67 +11,76 @@ import org.openqa.selenium.remote.DesiredCapabilities;
 
 import java.net.MalformedURLException;
 import java.net.URL;
+import java.util.HashMap;
+import java.util.Map;
 
 public class DriverFactory {
     private static final ThreadLocal<AppiumDriver> driver = new ThreadLocal<>();
 
-    /**
-     * Appium driver başlatır (IPA/APK, bundleId veya sadece cihaz bağlantısı ile).
-     */
     public static void initDriver() throws MalformedURLException {
         String environment = ConfigManager.getEnvironment();
         String platform = ConfigManager.getPlatform();
-        int deviceIndex = ConfigManager.getDeviceIndex();
 
-        // Local/Cloud için capability seti
         DesiredCapabilities caps = "cloud".equalsIgnoreCase(environment)
                 ? CloudCapabilities.getCapabilities(platform)
                 : LocalCapabilities.getCapabilities(platform);
 
-        // Session başlatma opsiyonları:
         String appPath = System.getProperty("app.cloudPath", "");
         String localPath = System.getProperty("app.localPath", "");
         String bundleId = System.getProperty("app.bundleId", "");
+        String targetBundleId = System.getProperty("app.targetBundleId", "");
         boolean isTestFlight = Boolean.parseBoolean(System.getProperty("app.isTestFlight", "false"));
 
-        // 1) IPA/APK yolu ile (cloud veya local)
-        if ((appPath != null && !appPath.trim().isEmpty()) || (localPath != null && !localPath.trim().isEmpty())) {
+        // App yükleme yolları öncelikli
+        if ((appPath != null && !appPath.isBlank()) || (localPath != null && !localPath.isBlank())) {
             String selectedPath = "cloud".equalsIgnoreCase(environment) ? appPath : localPath;
             caps.setCapability("appium:app", selectedPath);
-            System.out.println("[DriverFactory] App ile session başlatılıyor: " + selectedPath);
+            System.out.println("[DriverFactory] App ile başlatılıyor: " + selectedPath);
         }
-        // 2) BundleID ile (cihazda yüklü uygulama)
-        else if (bundleId != null && !bundleId.trim().isEmpty() && !"com.apple.TestFlight".equals(bundleId)) {
+        // BundleId (TestFlight hariç)
+        else if (bundleId != null && !bundleId.isBlank() && !"com.apple.TestFlight".equals(bundleId)) {
             caps.setCapability("appium:bundleId", bundleId);
-            System.out.println("[DriverFactory] BundleID ile session başlatılıyor: " + bundleId);
+            System.out.println("[DriverFactory] BundleID ile başlatılıyor: " + bundleId);
         }
-        // 3) TestFlight ya da hiç app olmadan (cihaz sadece açılır)
-        else if (isTestFlight || (bundleId != null && "com.apple.TestFlight".equals(bundleId))) {
+        // TestFlight
+        else if (isTestFlight || "com.apple.TestFlight".equals(bundleId)) {
             caps.setCapability("appium:bundleId", "com.apple.TestFlight");
-            if (System.getProperty("app.targetBundleId") != null) {
-                caps.setCapability("momentum:targetBundleId", System.getProperty("app.targetBundleId"));
+            if (targetBundleId != null && !targetBundleId.isBlank()) {
+                caps.setCapability("momentum:targetBundleId", targetBundleId);
             }
-            System.out.println("[DriverFactory] TestFlight ile veya app olmadan session başlatılıyor (cihaz açık).");
+            System.out.println("[DriverFactory] TestFlight/boş cihaz başlatılıyor ("
+                    + ("cloud".equalsIgnoreCase(environment) ? "Cloud" : "Local") + ").");
         } else {
-            System.out.println("[DriverFactory] Uygulama belirtilmedi, cihaz boş şekilde başlatılıyor.");
+            System.out.println("[DriverFactory] App belirtilmedi, cihaz boş başlatılıyor.");
         }
 
-        // Capabilities loglama (debug amaçlı)
+        // momentum:options yalnızca Cloud için
+        if ("cloud".equalsIgnoreCase(environment)) {
+            caps.setCapability("momentum:options", ConfigManager.getMomentumOptions().toMap());
+        }
+
+        // Capabilities log
         try {
             ObjectMapper mapper = new ObjectMapper();
+            Map<String, Object> capsMap = new HashMap<>(caps.asMap());
+            Object momentumOptions = capsMap.get("momentum:options");
+            if (momentumOptions instanceof Map) {
+                capsMap.put("momentum:options", momentumOptions);
+            } else if (momentumOptions != null) {
+                capsMap.put("momentum:options", momentumOptions.toString());
+            }
             System.out.println("\n========== Appium Desired Capabilities ==========");
-            System.out.println(mapper.writerWithDefaultPrettyPrinter().writeValueAsString(caps.asMap()));
+            System.out.println(mapper.writerWithDefaultPrettyPrinter().writeValueAsString(capsMap));
             System.out.println("=================================================\n");
         } catch (Exception e) {
             System.err.println("[WARN] Capabilities JSON log yazılamadı: " + e.getMessage());
         }
 
-        // Server URL (cloud vs local)
-        URL serverUrl = "cloud".equalsIgnoreCase(environment)
-                ? new URL("https://console.momentumsuite.com/gateway/wd/hub")
-                : new URL("http://127.0.0.1:4723/");
+        String serverUrlStr = "cloud".equalsIgnoreCase(environment)
+                ? ConfigManager.getCloudServerUrl()
+                : "http://127.0.0.1:" + ConfigManager.getDeviceGw();
 
-        // Driver başlat
+        URL serverUrl = new URL(serverUrlStr);
         if ("android".equalsIgnoreCase(platform)) {
             driver.set(new AndroidDriver(serverUrl, caps));
         } else if ("ios".equalsIgnoreCase(platform)) {
@@ -80,15 +89,14 @@ public class DriverFactory {
             throw new IllegalArgumentException("Unsupported platform: " + platform);
         }
 
-        System.out.println("[INFO] Appium driver başarıyla başlatıldı (" + environment + " / " + platform + ")");
+        System.out.println("[INFO] Appium driver başlatıldı (" + environment + " / " + platform +
+                " @port " + ConfigManager.getDeviceGw() + ")");
     }
 
-    /** Thread bazlı driver döner */
     public static AppiumDriver getDriver() {
         return driver.get();
     }
 
-    /** Thread bazlı driver kapatır */
     public static void quitDriver() {
         if (driver.get() != null) {
             driver.get().quit();

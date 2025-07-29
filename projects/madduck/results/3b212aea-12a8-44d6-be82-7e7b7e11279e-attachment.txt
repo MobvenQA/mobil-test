@@ -1,1 +1,0 @@
-Mevcut kurulu uygulama kaldırılıyor (varsa): com.forplay.app

@@ -18,11 +18,13 @@ public class TestFlightSteps {
     public void testflightOpen(String bundleId) {
         LoggerHelper.log(LogLevel.INFO, "TestFlight açılıyor ve terminate+activate yapılıyor...");
         testFlightPage.openTestFlight(bundleId);
-        testFlightPage.handlePermissions();
+        //testFlightPage.handlePermissions();
     }
 
     @When("{string} uygulaması TestFlight'ta aranır ve bulunursa tıklanır")
     public void searchAndTap(String appKey) throws Exception {
+
+        //testFlightPage.handlePermissions();
         LoggerHelper.log(LogLevel.INFO, "TestFlight içinde uygulama aranıyor: " + appKey);
 
         // ConfigManager'dan appName al (SuiteHooks appKey set ettiği için güvenilir)

@@ -36,7 +36,6 @@ public class ConfigManager {
         return sb.toString();
     }
 
-    /** SuiteHooks / CLI tarafından environment & platform & device index & appKey set edilir */
     public static void setContext(String environment, String platform, int deviceIndex) {
         threadEnvironment.set(environment.toLowerCase());
         threadPlatform.set(platform.toLowerCase());
@@ -47,23 +46,11 @@ public class ConfigManager {
         threadAppKey.set(appKey);
     }
 
-    public static String getEnvironment() {
-        return threadEnvironment.get();
-    }
+    public static String getEnvironment() { return threadEnvironment.get(); }
+    public static String getPlatform() { return threadPlatform.get(); }
+    public static int getDeviceIndex() { return threadDeviceIndex.get(); }
+    public static String getAppKey() { return threadAppKey.get(); }
 
-    public static String getPlatform() {
-        return threadPlatform.get();
-    }
-
-    public static int getDeviceIndex() {
-        return threadDeviceIndex.get();
-    }
-
-    public static String getAppKey() {
-        return threadAppKey.get();
-    }
-
-    /** Device bilgileri */
     public static JSONObject getDevice() {
         String env = getEnvironment();
         String platform = getPlatform();
@@ -80,45 +67,48 @@ public class ConfigManager {
         if (devices == null || index >= devices.length()) {
             throw new RuntimeException("Device index bulunamadı: env=" + env + ", platform=" + platform + ", index=" + index);
         }
-
         return devices.getJSONObject(index);
     }
 
-    public static String getDeviceName() {
-        return getDevice().optString("deviceName", "");
-    }
+    public static String getDeviceName() { return getDevice().optString("deviceName", ""); }
+    public static String getDeviceUdid() { return getDevice().optString("udid", ""); }
+    public static String getDeviceVersion() { return getDevice().optString("platformVersion", ""); }
+    public static int getDeviceGw() { return getDevice().optInt("gw", 0); }
 
-    public static String getDeviceUdid() {
-        return getDevice().optString("udid", "");
-    }
-
-    public static String getDeviceVersion() {
-        return getDevice().optString("platformVersion", "");
-    }
-
-    public static int getDeviceGw() {
-        return getDevice().optInt("gw", 0);
-    }
-
-    /** App bilgileri */
     public static JSONObject getApp() {
         String appKey = getAppKey();
-        if (appKey == null) throw new RuntimeException("App key henüz set edilmedi!");
+        if (appKey == null || appKey.isBlank()) {
+            JSONObject platformConfig = envConfig
+                    .getJSONObject("environments")
+                    .getJSONObject(getEnvironment())
+                    .getJSONObject("platforms")
+                    .getJSONObject(getPlatform());
+
+            JSONObject apps = platformConfig.optJSONObject("apps");
+            if (apps != null && apps.keys().hasNext()) {
+                String firstKey = apps.keys().next();
+                System.out.println("[ConfigManager][WARN] AppKey set edilmedi, fallback: " + firstKey);
+                return apps.getJSONObject(firstKey);
+            }
+            System.out.println("[ConfigManager][WARN] AppKey set edilmedi, boş app döndü.");
+            return new JSONObject();
+        }
         return getApp(appKey);
     }
+
     private static JSONObject findKeyIgnoreCase(JSONObject obj, String key) {
         if (obj == null || key == null) return null;
-        if (obj.has(key)) return obj.getJSONObject(key);          // birebir
-        for (String k : obj.keySet()) {                           // case-insensitive
+        if (obj.has(key)) return obj.getJSONObject(key);
+        for (String k : obj.keySet()) {
             if (k.equalsIgnoreCase(key)) return obj.getJSONObject(k);
         }
         return null;
     }
+
     public static JSONObject getApp(String appKey) {
         String env = getEnvironment();
         String platform = getPlatform();
 
-        // 1) Yeni şema (env -> platforms -> platform -> apps)
         JSONObject envObj = envConfig.getJSONObject("environments").getJSONObject(env);
         JSONObject appsUnderPlatform = null;
         if (envObj.has("platforms")) {
@@ -128,30 +118,19 @@ public class ConfigManager {
         JSONObject candidate = findKeyIgnoreCase(appsUnderPlatform, appKey);
         if (candidate != null) return candidate;
 
-        // 2) GERİYE DÖNÜK: Top-level "apps"
         JSONObject globalApps = envConfig.optJSONObject("apps");
         candidate = findKeyIgnoreCase(globalApps, appKey);
         if (candidate != null) return candidate;
 
         throw new RuntimeException("App bulunamadı: " + appKey + " (env=" + env + ", platform=" + platform + ")");
     }
-    public static String getAppBundleId() {
-        return getApp().optString("bundleId", "");
-    }
 
-    public static String getAppCloudPath() {
-        return getApp().optString("cloudAppPath", "");
-    }
+    public static String getAppBundleId() { return getApp().optString("bundleId", ""); }
+    public static String getAppTargetBundleId() { return getApp().optString("targetBundleId", ""); }
+    public static String getAppCloudPath() { return getApp().optString("cloudAppPath", ""); }
+    public static String getAppLocalPath() { return getApp().optString("localAppPath", ""); }
+    public static String getAppName() { return getApp().optString("appName", ""); }
 
-    public static String getAppLocalPath() {
-        return getApp().optString("localAppPath", "");
-    }
-
-    public static String getAppName() {
-        return getApp().optString("appName", "");
-    }
-
-    /** MomentumSuite (Cloud) için opsiyonel options objesi */
     public static JSONObject getMomentumOptions() {
         JSONObject creds = getCloudCredentials();
         JSONObject opts = new JSONObject();
@@ -172,7 +151,6 @@ public class ConfigManager {
         return creds.optString("serverUrl", "https://console.momentumsuite.com/gateway/wd/hub");
     }
 
-    /** WDA ve Webkit için benzersiz port hesaplama */
     public static int getPortOffset(int baseOffset) {
         return getDeviceGw() + 4000 + baseOffset;
     }

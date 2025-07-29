@@ -14,13 +14,19 @@
               "udid": "00008110-001A55D83402601E",
               "platformVersion": "18.5",
               "gw": 4723
+            },
+            {
+              "deviceName": "iPhone 15",
+              "udid": "00008110-001A525D83402601E",
+              "platformVersion": "18.5",
+              "gw": 4724
             }
           ],
           "apps": {
-            "Geovision": {
+            "Playdate": {
               "bundleId": "com.apple.TestFlight",
-              "targetBundleId": "com.madduck.geovs",
-              "appName": "AI Photo Location Finder：GeoAI"
+              "targetBundleId": "com.madduck.playdate",
+              "appName": "Playdate - AI for Kids"
             }
           }
         },
@@ -64,10 +70,10 @@
             { "deviceName": "", "udid": "", "gw": 4002 }
           ],
           "apps": {
-            "Sociable": {
+            "Playdate": {
               "bundleId": "com.apple.TestFlight",
-              "appName": "Sociable - Video Chat & Games",
-              "targetBundleId": "com.forplay.app"
+              "targetBundleId": "com.madduck.playdate",
+              "appName": "Playdate - AI for Kids"
             }
           }
         }

@@ -23,6 +23,7 @@ import java.util.List;
 import java.util.Random;
 
 import static com.flick.utils.ScreenshotHelper.captureAndAttach;
+import static com.flick.utils.ScreenshotHelper.captureAndAttachCompressed;
 
 public class TestUtils {
 
@@ -40,6 +41,8 @@ public class TestUtils {
             throw new AssertionError("Text assertion failed. Expected to contain: " + expectedText + ", but got: " + actualText);
         }
         captureAndAttach(driver, "Assertion" , LogLevel.INFO);
+        captureAndAttachCompressed(driver, "Step adı", LogLevel.INFO, 0.75f, 1080);
+
 
         System.out.println("✅ Text assertion passed: " + actualText);
     }
@@ -49,11 +52,15 @@ public class TestUtils {
                 iosDriver.terminateApp(bundleOrAppId);
                 Thread.sleep(1000);
                 captureAndAttach(iosDriver, "App Kapandı", LogLevel.INFO);
+                captureAndAttachCompressed(driver, "Step adı", LogLevel.INFO, 0.75f, 1080);
+
                 iosDriver.activateApp(bundleOrAppId);
             } else if (androidDriver != null) {
                 androidDriver.terminateApp(bundleOrAppId);
                 Thread.sleep(1000);
                 captureAndAttach(androidDriver, "App Kapandı", LogLevel.INFO);
+                captureAndAttachCompressed(driver, "Step adı", LogLevel.INFO, 0.75f, 1080);
+
                 androidDriver.activateApp(bundleOrAppId);
             } else {
                 throw new IllegalArgumentException("Driver hem iOS hem Android değil!");
@@ -101,8 +108,10 @@ public class TestUtils {
                 waitAndClick(signInLocator, 10);
                 Thread.sleep(500);
                 captureAndAttach(driver, "Sing In Tıklandı", LogLevel.INFO);
+                captureAndAttachCompressed(driver, "Step adı", LogLevel.INFO, 0.75f, 1080);
+
                 System.out.println("📲 İki faktör doğrulama kontrol ediliyor...");
-               // this.handle2FAIfPresent();
+                TwoFactorHandler.handleIfVisible(this.driver);
             } else {
                 System.out.printf("⚠️ Device %d: Subscribe veya Purchase elementi görünür değil.\n", deviceIndex);
             }
@@ -157,6 +166,8 @@ public class TestUtils {
                 }
             }
             captureAndAttach(driver, "Handle Pop Up", LogLevel.INFO);
+            captureAndAttachCompressed(driver, "Step adı", LogLevel.INFO, 0.75f, 1080);
+
 
             if (!elementFound) {
                 Reporter.log("Popup not found within " + timeoutMillis + "ms: " + selector);
@@ -207,6 +218,8 @@ public class TestUtils {
             });
             System.out.println("✅ waitForElement: " + locator);
             captureAndAttach(driver, "WaitFor Element" , LogLevel.INFO);
+            captureAndAttachCompressed(driver, "Step adı", LogLevel.INFO, 0.75f, 1080);
+
 
             return element;
         } catch (TimeoutException e) {
@@ -235,6 +248,8 @@ public class TestUtils {
                 if (el.isDisplayed() && el.isEnabled()) {
                     el.click();
                     captureAndAttach(driver, "Click With Delay" , LogLevel.INFO);
+                    captureAndAttachCompressed(driver, "Step adı", LogLevel.INFO, 0.75f, 1080);
+
 
                     System.out.printf("[%s] ✅ Device %d clicked (with delay): %s\n", Instant.now(), deviceIndex, locator);
                     return;
@@ -243,6 +258,8 @@ public class TestUtils {
             Thread.sleep(500);
         }
         captureAndAttach(driver, "Click With Delay" , LogLevel.INFO);
+        captureAndAttachCompressed(driver, "Step adı", LogLevel.INFO, 0.75f, 1080);
+
 
         throw new Exception(String.format("❌ Device %d could not click within timeout: %s", deviceIndex, locator));
     }
@@ -353,6 +370,8 @@ public class TestUtils {
 
             driver.perform(Collections.singletonList(tap));
             captureAndAttach(driver, " tapCenter", LogLevel.INFO);
+            captureAndAttachCompressed(driver, "Step adı", LogLevel.INFO, 0.75f, 1080);
+
             System.out.println("Tap Success " + locator);
         } catch (Exception e) {
             System.err.println("❌ Tap failed: " + locator);
@@ -364,16 +383,19 @@ public class TestUtils {
             WebElement element = wait.until(ExpectedConditions.elementToBeClickable(locator));
             element.click();
             captureAndAttach(driver, "clickIfExists: " + locator.toString(), LogLevel.INFO);
+            captureAndAttachCompressed(driver, "Step adı", LogLevel.INFO, 0.75f, 1080);
+
             return true;
         } catch (TimeoutException e) {
             System.err.println("❌ Element not clickable within timeout: " + locator);
-            captureAndAttach(driver, "clickIfExists: ", LogLevel.ERROR);
+            captureAndAttachCompressed(driver, "Step adı", LogLevel.INFO, 0.75f, 1080);
         } catch (NoSuchElementException e) {
             System.err.println("❌ Element not found: " + locator);
-            captureAndAttach(driver, "clickIfExists: " , LogLevel.ERROR);
+            captureAndAttachCompressed(driver, "Step adı", LogLevel.INFO, 0.75f, 1080);
         } catch (Exception e) {
             System.err.println("❌ Unexpected error clicking element " + locator + ": " + e.getMessage());
-            captureAndAttach(driver, "clickIfExists: ", LogLevel.ERROR);
+            captureAndAttachCompressed(driver, "Step adı", LogLevel.INFO, 0.75f, 1080);
+
         }
         return false;
     }
@@ -381,9 +403,13 @@ public class TestUtils {
         try {
             WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(timeoutInSeconds));
             WebElement element = wait.until(ExpectedConditions.elementToBeClickable(locator));
-            element.click();
+            try{
+                element.click();
+            }catch(Exception e){
+                System.out.println(" Tıklama İşlemi başarısız" + " :  "+ e.getMessage());
+            }
             System.out.println("Tıklama İşlemi Başarılı"  + " : " + locator);
-            captureAndAttach(driver, "...", LogLevel.INFO);
+            captureAndAttachCompressed(driver, "Step adı", LogLevel.INFO, 0.75f, 1080);
 
         } catch (Exception e) {
             throw new RuntimeException("❌ Element not clickable: " + locator, e);
@@ -395,23 +421,39 @@ public class TestUtils {
      * @param timeout Elementin aranacağı maksimum süre (saniye)
      * @throws AssertionError Hiçbir element bulunamazsa veya tıklanabilir durumda değilse
      */
-    public void safeClickOneOf(List<By> locators, int timeout) {
-        String errorMessage = "❌ Hiçbir element bulunamadı veya tıklanabilir değil. Locators:\n";
+    public void safeClickOneOf(List<By> locators, int timeoutSeconds) {
+        long deadline = System.nanoTime() + java.util.concurrent.TimeUnit.SECONDS.toNanos(timeoutSeconds);
+        Throwable lastError = null;
 
-        for (By locator : locators) {
-            try {
-                WebElement element = new WebDriverWait(driver, Duration.ofSeconds(timeout))
-                        .until(ExpectedConditions.elementToBeClickable(locator));
-                element.click();
-                return;
-            } catch (TimeoutException e) {
-                errorMessage += "- " + locator.toString() + "\n";
-                continue;
+        while (System.nanoTime() < deadline) {
+            for (By by : locators) {
+                try {
+                    // Birden fazla eşleşen element olabilir -> ilk görünen & etkin olana tıkla
+                    for (org.openqa.selenium.WebElement el : driver.findElements(by)) {
+                        if (el.isDisplayed() && el.isEnabled()) {
+                            try {
+                                el.click();
+                                // İstersen log: LoggerHelper.log(LogLevel.INFO, "Clicked: " + by);
+                                return;
+                            } catch (org.openqa.selenium.WebDriverException clickErr) {
+                                lastError = clickErr; // başka locatora geç
+                            }
+                        }
+                    }
+                } catch (Exception e) {
+                    lastError = e; // başka locatora geç
+                }
             }
+            try { Thread.sleep(200); } catch (InterruptedException ignored) {}
         }
 
-        throw new AssertionError(errorMessage);
+        String list = locators.stream().map(By::toString).collect(java.util.stream.Collectors.joining("\n - "));
+        throw new org.openqa.selenium.TimeoutException(
+                "❌ Süre içinde tıklanabilir element bulunamadı. Denenen locator'lar:\n - " + list,
+                lastError
+        );
     }
+
     public boolean waitUntilVisible(By locator, int timeoutInSeconds) {
         try {
             new WebDriverWait(driver, Duration.ofSeconds(timeoutInSeconds))
@@ -447,6 +489,7 @@ public class TestUtils {
             Thread.sleep(500);
         }
         captureAndAttach(driver, "Döngü Sonu Input Value", LogLevel.INFO);
+        captureAndAttachCompressed(driver, "Step adı", LogLevel.INFO, 0.75f, 1080);
 
 
         if (element == null || !(element.isDisplayed() || element.isEnabled())) {
@@ -458,8 +501,12 @@ public class TestUtils {
             element.sendKeys(value);
             System.out.println("✅ inputValue: " + locator + " = " + value);
             captureAndAttach(driver, "inputValue-success", LogLevel.INFO);
+            captureAndAttachCompressed(driver, "Step adı", LogLevel.INFO, 0.75f, 1080);
+
         } catch (Exception e) {
             captureAndAttach(driver, "inputValue-failure", LogLevel.ERROR);
+            captureAndAttachCompressed(driver, "Step adı", LogLevel.INFO, 0.75f, 1080);
+
             throw new Exception("❌ Failed to send keys to: " + locator, e);
         }
     }

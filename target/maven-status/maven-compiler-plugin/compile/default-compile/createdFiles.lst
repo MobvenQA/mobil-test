@@ -1,8 +1,10 @@
 com/flick/utils/LoggerHelper.class
+com/flick/utils/LoggerHelper$1.class
 com/flick/capabilities/LocalCapabilities.class
 com/flick/utils/LogLevel.class
 com/flick/pages/TestFlightPage.class
 com/flick/utils/ScreenshotHelper.class
+com/flick/pages/OnboardingPage.class
 com/flick/utils/TestUtils.class
 com/flick/drivers/DriverFactory.class
 com/flick/capabilities/CloudCapabilities.class

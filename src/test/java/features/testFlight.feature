@@ -1,4 +1,4 @@
-@testflight @ios @cloud
+@f01_testflight @ios @local
 Feature: TestFlight üzerinden uygulama kurulumu ve açılışı
 
   Scenario Outline: TestFlight ile bir uygulamayı indirip aç
@@ -10,6 +10,5 @@ Feature: TestFlight üzerinden uygulama kurulumu ve açılışı
     Then "<appKey>" uygulamasının başarıyla açıldığı doğrulanır
 
     Examples:
-      | appKey     | bundleId              | targetBundleId                |
-      | Sociable - Video Chat & Games   | com.apple.TestFlight  | com.forplay.app             |
-
+      | appKey                  | bundleId               | targetBundleId     |
+      | Playdate - AI for Kids  | com.apple.TestFlight   | com.madduck.playdate   |

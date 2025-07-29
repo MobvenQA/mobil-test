@@ -1,1 +1,0 @@
-===== START TEST: TestFlight ile bir uygulamayı indirip aç =====

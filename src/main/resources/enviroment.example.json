@@ -58,7 +58,7 @@
           "apps": {
             "Playdate": {
               "bundleId": "com.apple.TestFlight",
-              "targetBundleId": "com.playdate.app",
+              "targetBundleId": "com.madduck.playdate",
               "appName": "Playdate - AI for Kids"
             }
           }

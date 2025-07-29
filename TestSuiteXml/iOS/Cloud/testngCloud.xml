@@ -1,14 +1,15 @@
 <!DOCTYPE suite SYSTEM "https://testng.org/testng-1.0.dtd">
-<suite name="Mobile Automation Suite - Cloud iOS" verbose="1" parallel="false">
+<suite name="Cloud iOS - Sequential" parallel="false" preserve-order="true">
     <parameter name="environment" value="cloud"/>
     <parameter name="platform" value="ios"/>
-    <parameter name="appKey" value="Sociable"/>
+    <parameter name="appKey" value="Playdate"/>
     <parameter name="deviceIndex" value="0"/>
 
-    <test name="iOS Cloud Single Device">
+    <!-- Tüm feature’ları tek session ile sırayla koşar -->
+    <test name="All Features Sequential">
         <classes>
-            <class name="stepDefinitions.SuiteHooks"/>
-            <class name="com.flick.runners.TestRunner"/>
+            <class name="stepDefinitions.SuiteHooks"/> <!-- Driver bir kez açılır -->
+            <class name="com.flick.runners.TestRunner"/> <!-- testFlight ve onboard sırayla -->
         </classes>
     </test>
 </suite>

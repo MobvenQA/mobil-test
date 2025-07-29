@@ -21,14 +21,22 @@ public class LocalCapabilities {
         caps.setCapability("appium:udid", ConfigManager.getDeviceUdid());
         caps.setCapability("appium:platformVersion", ConfigManager.getDeviceVersion());
 
-        // Port çakışmasını önlemek için gw + 4000 offset kullan
+        // Port çakışmalarını önle (paralel testler için)
         caps.setCapability("appium:wdaLocalPort", ConfigManager.getPortOffset(41));
         caps.setCapability("appium:webkitDebugProxyPort", ConfigManager.getPortOffset(42));
 
-        // Local app path
-        String appLocalPath = ConfigManager.getAppLocalPath();
-        if (appLocalPath != null && !appLocalPath.isEmpty()) {
-            caps.setCapability("appium:app", appLocalPath);
+        // App veya TestFlight bilgisi
+        String localAppPath = ConfigManager.getAppLocalPath();
+        String bundleId = ConfigManager.getAppBundleId();
+        String targetBundleId = ConfigManager.getAppTargetBundleId();
+
+        if (localAppPath != null && !localAppPath.isEmpty()) {
+            caps.setCapability("appium:app", localAppPath);
+        } else if (bundleId != null && !bundleId.isEmpty()) {
+            caps.setCapability("appium:bundleId", bundleId);
+            if (targetBundleId != null && !targetBundleId.isEmpty()) {
+                caps.setCapability("momentum:targetBundleId", targetBundleId);
+            }
         }
 
         return caps;
