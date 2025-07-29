@@ -1,0 +1,10 @@
+[01:57:16] [main] [INFO] ===== START TEST: TestFlight ile bir uygulamayı indirip aç =====
+[01:57:16] [main] [INFO] Scenario Başlatıldı: TestFlight ile bir uygulamayı indirip aç
+[01:57:16] [main] [INFO] Env: cloud | Platform: ios | Device Index: 0 | AppKey: Sociable
+[01:57:18] [main] [INFO] TestFlight açılıyor ve terminate+activate yapılıyor...
+[01:57:45] [main] [INFO] TestFlight içinde uygulama aranıyor: Sociable - Video Chat & Games
+[01:57:49] [main] [INFO] ✅ App bulundu ve tıklandı: Sociable - Video Chat & Games
+[01:57:49] [main] [WARN] Mevcut kurulu uygulama kaldırılıyor (varsa): com.forplay.app
+[01:57:49] [main] [INFO] TestFlight Install akışı başlıyor...
+[01:58:41] [main] [INFO] Senaryo Tamamlandı: TestFlight ile bir uygulamayı indirip aç => FAILED
+[01:58:42] [main] [INFO] ===== END TEST: TestFlight ile bir uygulamayı indirip aç =====

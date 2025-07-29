@@ -1,0 +1,32 @@
+[01:39:48] [TestNG-tests-1] [INFO] ===== START TEST: TestFlight ile bir uygulamayı indirip aç =====
+[01:39:48] [TestNG-tests-3] [INFO] ===== START TEST: TestFlight ile bir uygulamayı indirip aç =====
+[01:39:48] [TestNG-tests-2] [INFO] ===== START TEST: TestFlight ile bir uygulamayı indirip aç =====
+[01:39:48] [TestNG-tests-1] [INFO] Scenario Başlatıldı: TestFlight ile bir uygulamayı indirip aç
+[01:39:48] [TestNG-tests-3] [INFO] Scenario Başlatıldı: TestFlight ile bir uygulamayı indirip aç
+[01:39:48] [TestNG-tests-2] [INFO] Scenario Başlatıldı: TestFlight ile bir uygulamayı indirip aç
+[01:39:48] [TestNG-tests-2] [INFO] Env: cloud | Platform: ios | Device Index: 1 | AppKey: Sociable
+[01:39:48] [TestNG-tests-3] [INFO] Env: cloud | Platform: ios | Device Index: 2 | AppKey: Sociable
+[01:39:48] [TestNG-tests-1] [INFO] Env: cloud | Platform: ios | Device Index: 0 | AppKey: Sociable
+[01:39:51] [TestNG-tests-2] [INFO] TestFlight açılıyor ve terminate+activate yapılıyor...
+[01:39:51] [TestNG-tests-1] [INFO] TestFlight açılıyor ve terminate+activate yapılıyor...
+[01:39:56] [TestNG-tests-2] [INFO] TestFlight içinde uygulama aranıyor: Sociable - Video Chat & Games
+[01:40:01] [TestNG-tests-2] [INFO] ✅ App bulundu ve tıklandı: Sociable - Video Chat & Games
+[01:40:01] [TestNG-tests-2] [WARN] Mevcut kurulu uygulama kaldırılıyor (varsa): com.forplay.app
+[01:40:02] [TestNG-tests-2] [INFO] TestFlight Install akışı başlıyor...
+[01:40:04] [TestNG-tests-1] [INFO] TestFlight içinde uygulama aranıyor: Sociable - Video Chat & Games
+[01:40:12] [TestNG-tests-2] [INFO] OPEN butonu bekleniyor ve tıklanıyor...
+[01:40:27] [TestNG-tests-3] [INFO] TestFlight açılıyor ve terminate+activate yapılıyor...
+[01:40:33] [TestNG-tests-3] [INFO] TestFlight içinde uygulama aranıyor: Sociable - Video Chat & Games
+[01:40:38] [TestNG-tests-3] [INFO] ✅ App bulundu ve tıklandı: Sociable - Video Chat & Games
+[01:40:38] [TestNG-tests-3] [WARN] Mevcut kurulu uygulama kaldırılıyor (varsa): com.forplay.app
+[01:40:38] [TestNG-tests-3] [INFO] TestFlight Install akışı başlıyor...
+[01:40:49] [TestNG-tests-3] [INFO] OPEN butonu bekleniyor ve tıklanıyor...
+[01:41:09] [TestNG-tests-3] [INFO] Uygulama açılış doğrulaması yapılıyor: Sociable - Video Chat & Games
+[01:41:09] [TestNG-tests-3] [INFO] Open App Verify...
+[01:41:14] [TestNG-tests-3] [INFO] Doğrulama tamamlandı: Sociable - Video Chat & Games
+[01:41:14] [TestNG-tests-3] [INFO] Senaryo Tamamlandı: TestFlight ile bir uygulamayı indirip aç => PASSED
+[01:41:15] [TestNG-tests-3] [INFO] ===== END TEST: TestFlight ile bir uygulamayı indirip aç =====
+[01:41:36] [TestNG-tests-1] [INFO] Senaryo Tamamlandı: TestFlight ile bir uygulamayı indirip aç => FAILED
+[01:41:36] [TestNG-tests-1] [INFO] ===== END TEST: TestFlight ile bir uygulamayı indirip aç =====
+[01:41:44] [TestNG-tests-2] [INFO] Senaryo Tamamlandı: TestFlight ile bir uygulamayı indirip aç => FAILED
+[01:41:45] [TestNG-tests-2] [INFO] ===== END TEST: TestFlight ile bir uygulamayı indirip aç =====

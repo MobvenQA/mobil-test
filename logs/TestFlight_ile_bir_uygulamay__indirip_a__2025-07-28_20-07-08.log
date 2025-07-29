@@ -1,0 +1,5 @@
+[20:07:09] [main] [INFO] ===== START TEST: TestFlight ile bir uygulamayı indirip aç =====
+[20:07:09] [main] [INFO] Scenario Başlatıldı: TestFlight ile bir uygulamayı indirip aç
+[20:07:09] [main] [INFO] Env: cloud | Platform: ios | Device Index: 0
+[20:07:17] [main] [INFO] TestFlight açılıyor ve terminate+activate yapılıyor...
+[20:07:22] [main] [INFO] TestFlight içinde uygulama aranıyor: Playdate

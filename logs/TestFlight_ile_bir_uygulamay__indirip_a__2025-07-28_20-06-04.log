@@ -1,0 +1,15 @@
+[20:06:04] [main] [INFO] ===== START TEST: TestFlight ile bir uygulamayı indirip aç =====
+[20:06:04] [main] [INFO] Scenario Başlatıldı: TestFlight ile bir uygulamayı indirip aç
+[20:06:04] [main] [INFO] Env: local | Platform: ios | Device Index: 0
+[20:06:06] [main] [INFO] TestFlight açılıyor ve terminate+activate yapılıyor...
+[20:06:10] [main] [INFO] TestFlight içinde uygulama aranıyor: Geovision
+[20:06:14] [main] [INFO] ✅ App bulundu ve tıklandı: AI Photo Location Finder：GeoAI
+[20:06:14] [main] [WARN] Mevcut kurulu uygulama kaldırılıyor (varsa): com.madduck.geovs
+[20:06:14] [main] [WARN] ✅ App kaldırıldı: com.madduck.geovs
+[20:06:14] [main] [INFO] TestFlight Install akışı başlıyor...
+[20:06:21] [main] [INFO] OPEN butonu bekleniyor ve tıklanıyor...
+[20:06:24] [main] [INFO] Uygulama açılış doğrulaması yapılıyor: Geovision
+[20:06:24] [main] [INFO] Open App Verify...
+[20:06:29] [main] [INFO] Doğrulama tamamlandı: Geovision
+[20:06:29] [main] [INFO] Senaryo Tamamlandı: TestFlight ile bir uygulamayı indirip aç => PASSED
+[20:06:29] [main] [INFO] ===== END TEST: TestFlight ile bir uygulamayı indirip aç =====

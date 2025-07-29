@@ -1,0 +1,14 @@
+<!DOCTYPE suite SYSTEM "https://testng.org/testng-1.0.dtd">
+<suite name="Mobile Automation Suite - Cloud iOS" verbose="1" parallel="false">
+    <parameter name="environment" value="cloud"/>
+    <parameter name="platform" value="ios"/>
+    <parameter name="appKey" value="Sociable"/>
+    <parameter name="deviceIndex" value="0"/>
+
+    <test name="iOS Cloud Single Device">
+        <classes>
+            <class name="stepDefinitions.SuiteHooks"/>
+            <class name="com.flick.runners.TestRunner"/>
+        </classes>
+    </test>
+</suite>

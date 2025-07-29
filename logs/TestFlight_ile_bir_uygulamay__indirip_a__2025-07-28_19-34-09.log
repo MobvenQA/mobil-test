@@ -1,0 +1,6 @@
+[19:34:09] [main] [INFO] ===== START TEST: TestFlight ile bir uygulamayı indirip aç =====
+[19:34:09] [main] [INFO] Scenario Başlatıldı: TestFlight ile bir uygulamayı indirip aç
+[19:34:09] [main] [INFO] Env: local | Platform: ios | Device Index: 0
+[19:34:09] [main] [ERROR] Senaryo başlatılamadı: App key henüz set edilmedi!
+[19:34:09] [main] [ERROR] Senaryo HATA ile tamamlandı: TestFlight ile bir uygulamayı indirip aç
+[19:34:09] [main] [INFO] ===== END TEST: TestFlight ile bir uygulamayı indirip aç =====

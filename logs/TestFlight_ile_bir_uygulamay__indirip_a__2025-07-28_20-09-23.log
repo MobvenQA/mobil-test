@@ -1,0 +1,10 @@
+[20:09:23] [main] [INFO] ===== START TEST: TestFlight ile bir uygulamayı indirip aç =====
+[20:09:23] [main] [INFO] Scenario Başlatıldı: TestFlight ile bir uygulamayı indirip aç
+[20:09:23] [main] [INFO] Env: cloud | Platform: ios | Device Index: 0
+[20:09:25] [main] [INFO] TestFlight açılıyor ve terminate+activate yapılıyor...
+[20:09:30] [main] [INFO] TestFlight içinde uygulama aranıyor: Playdate - AI for Kids
+[20:09:34] [main] [INFO] ✅ App bulundu ve tıklandı: Playdate - AI for Kids
+[20:09:34] [main] [WARN] Mevcut kurulu uygulama kaldırılıyor (varsa): com.playdate.app
+[20:09:34] [main] [INFO] TestFlight Install akışı başlıyor...
+[20:09:41] [main] [INFO] Senaryo Tamamlandı: TestFlight ile bir uygulamayı indirip aç => FAILED
+[20:09:41] [main] [INFO] ===== END TEST: TestFlight ile bir uygulamayı indirip aç =====

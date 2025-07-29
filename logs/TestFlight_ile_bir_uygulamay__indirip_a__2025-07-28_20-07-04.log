@@ -1,0 +1,10 @@
+[20:07:04] [main] [INFO] ===== START TEST: TestFlight ile bir uygulamayı indirip aç =====
+[20:07:04] [main] [INFO] Scenario Başlatıldı: TestFlight ile bir uygulamayı indirip aç
+[20:07:04] [main] [INFO] Env: local | Platform: ios | Device Index: 0
+[20:07:06] [main] [INFO] TestFlight açılıyor ve terminate+activate yapılıyor...
+[20:07:10] [main] [INFO] TestFlight içinde uygulama aranıyor: Playdate
+[20:07:13] [main] [INFO] ✅ App bulundu ve tıklandı: AI Photo Location Finder：GeoAI
+[20:07:13] [main] [WARN] Mevcut kurulu uygulama kaldırılıyor (varsa): com.playdate.app
+[20:07:13] [main] [INFO] TestFlight Install akışı başlıyor...
+[20:07:18] [main] [INFO] Senaryo Tamamlandı: TestFlight ile bir uygulamayı indirip aç => FAILED
+[20:07:18] [main] [INFO] ===== END TEST: TestFlight ile bir uygulamayı indirip aç =====

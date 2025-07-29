@@ -1,0 +1,5 @@
+[01:55:46] [main] [INFO] ===== START TEST: TestFlight ile bir uygulamayı indirip aç =====
+[01:55:46] [main] [INFO] Scenario Başlatıldı: TestFlight ile bir uygulamayı indirip aç
+[01:55:46] [main] [INFO] Env: cloud | Platform: ios | Device Index: 0 | AppKey: Sociable
+[01:55:49] [main] [INFO] TestFlight açılıyor ve terminate+activate yapılıyor...
+[01:56:01] [main] [INFO] TestFlight içinde uygulama aranıyor: Sociable - Video Chat & Games

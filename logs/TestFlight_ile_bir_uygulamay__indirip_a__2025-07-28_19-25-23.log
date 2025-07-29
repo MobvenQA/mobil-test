@@ -1,0 +1,12 @@
+[19:25:23] [main] [INFO] ===== START TEST: TestFlight ile bir uygulamayı indirip aç =====
+[19:25:23] [main] [INFO] Scenario Başlatıldı: TestFlight ile bir uygulamayı indirip aç
+[19:25:23] [main] [INFO] Env: local | Platform: ios | Device Index: 0
+[19:25:23] [main] [ERROR] Senaryo başlatılamadı: App bulunamadı: GeoVision (env=local, platform=ios)
+[19:25:23] [main] [ERROR] Senaryo HATA ile tamamlandı: TestFlight ile bir uygulamayı indirip aç
+[19:25:23] [main] [INFO] ===== END TEST: TestFlight ile bir uygulamayı indirip aç =====
+[19:25:23] [main] [INFO] ===== START TEST: TestFlight ile bir uygulamayı indirip aç =====
+[19:25:23] [main] [INFO] Scenario Başlatıldı: TestFlight ile bir uygulamayı indirip aç
+[19:25:23] [main] [INFO] Env: local | Platform: ios | Device Index: 0
+[19:25:23] [main] [ERROR] Senaryo başlatılamadı: App bulunamadı: GeoVision (env=local, platform=ios)
+[19:25:23] [main] [ERROR] Senaryo HATA ile tamamlandı: TestFlight ile bir uygulamayı indirip aç
+[19:25:23] [main] [INFO] ===== END TEST: TestFlight ile bir uygulamayı indirip aç =====

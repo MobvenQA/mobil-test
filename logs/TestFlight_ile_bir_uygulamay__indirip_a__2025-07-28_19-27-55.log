@@ -1,0 +1,7 @@
+[19:27:55] [main] [INFO] ===== START TEST: TestFlight ile bir uygulamayı indirip aç =====
+[19:27:55] [main] [INFO] Scenario Başlatıldı: TestFlight ile bir uygulamayı indirip aç
+[19:27:55] [main] [INFO] Env: local | Platform: ios | Device Index: 0
+[19:28:12] [main] [INFO] TestFlight açılıyor ve terminate+activate yapılıyor...
+[19:28:15] [main] [INFO] TestFlight içinde uygulama aranıyor: Playdate
+[19:30:08] [main] [ERROR] Senaryo HATA ile tamamlandı: TestFlight ile bir uygulamayı indirip aç
+[19:30:08] [main] [INFO] ===== END TEST: TestFlight ile bir uygulamayı indirip aç =====

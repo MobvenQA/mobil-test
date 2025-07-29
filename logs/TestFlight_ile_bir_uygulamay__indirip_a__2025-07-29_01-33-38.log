@@ -1,0 +1,26 @@
+[01:33:38] [TestNG-tests-1] [INFO] ===== START TEST: TestFlight ile bir uygulamayı indirip aç =====
+[01:33:38] [TestNG-tests-3] [INFO] ===== START TEST: TestFlight ile bir uygulamayı indirip aç =====
+[01:33:38] [TestNG-tests-2] [INFO] ===== START TEST: TestFlight ile bir uygulamayı indirip aç =====
+[01:33:38] [TestNG-tests-3] [INFO] Scenario Başlatıldı: TestFlight ile bir uygulamayı indirip aç
+[01:33:38] [TestNG-tests-1] [INFO] Scenario Başlatıldı: TestFlight ile bir uygulamayı indirip aç
+[01:33:38] [TestNG-tests-2] [INFO] Scenario Başlatıldı: TestFlight ile bir uygulamayı indirip aç
+[01:33:38] [TestNG-tests-2] [INFO] Env: cloud | Platform: ios | Device Index: 1 | AppKey: Speed
+[01:33:38] [TestNG-tests-3] [INFO] Env: cloud | Platform: ios | Device Index: 2 | AppKey: Speed
+[01:33:38] [TestNG-tests-1] [INFO] Env: cloud | Platform: ios | Device Index: 0 | AppKey: Speed
+[01:33:41] [TestNG-tests-2] [INFO] TestFlight açılıyor ve terminate+activate yapılıyor...
+[01:33:41] [TestNG-tests-3] [INFO] TestFlight açılıyor ve terminate+activate yapılıyor...
+[01:33:45] [TestNG-tests-1] [ERROR] Senaryo başlatılamadı: Could not start a new session. Response code 500. Message: An unknown server-side error occurred while processing the command. Original error: Failed to receive any data within the timeout: 5000 
+Host info: host: '192.168.1.13', ip: '2a02:ff0:220:aa06:c5b2:f93:12af:2997%en0'
+Build info: version: '4.15.0', revision: '1d14b5521b'
+System info: os.name: 'Mac OS X', os.arch: 'x86_64', os.version: '13.5.2', java.version: '11.0.15.1'
+Driver info: io.appium.java_client.ios.IOSDriver
+Command: [null, newSession {capabilities=[{appium:autoAcceptAlerts=true, appium:autoDismissAlerts=true, appium:automationName=XCUITest, appium:bundleId=com.apple.TestFlight, appium:deviceName=, appium:fullReset=false, appium:language=en, appium:locale=US, appium:noReset=true, appium:udid=, appium:wdaLocalPort=8043, appium:webkitDebugProxyPort=8044, momentum:options={"gw":4002,"user":"hakan.tektas@mobven.com","token":"sncR7c22hHt4rSiaFuE2y1El52RG4cjfqQufJSb9q0A="}, platformName=IOS}], desiredCapabilities=Capabilities {appium:autoAcceptAlerts: true, appium:autoDismissAlerts: true, appium:automationName: XCUITest, appium:bundleId: com.apple.TestFlight, appium:deviceName: , appium:fullReset: false, appium:language: en, appium:locale: US, appium:noReset: true, appium:udid: , appium:wdaLocalPort: 8043, appium:webkitDebugProxyPort: 8044, momentum:options: {"gw":4002,"user":"hakan.te..., platformName: IOS}}]
+Capabilities {appium:autoAcceptAlerts: true, appium:autoDismissAlerts: true, appium:automationName: XCUITest, appium:bundleId: com.apple.TestFlight, appium:deviceName: , appium:fullReset: false, appium:language: en, appium:locale: US, appium:noReset: true, appium:udid: , appium:wdaLocalPort: 8043, appium:webkitDebugProxyPort: 8044, momentum:options: {"gw":4002,"user":"hakan.te..., platformName: IOS}
+[01:33:45] [TestNG-tests-1] [INFO] Senaryo Tamamlandı: TestFlight ile bir uygulamayı indirip aç => FAILED
+[01:33:45] [TestNG-tests-1] [INFO] ===== END TEST: TestFlight ile bir uygulamayı indirip aç =====
+[01:33:46] [TestNG-tests-3] [INFO] TestFlight içinde uygulama aranıyor: Speed Readingo: Read 3x Faster
+[01:33:53] [TestNG-tests-2] [INFO] TestFlight içinde uygulama aranıyor: Speed Readingo: Read 3x Faster
+[01:35:26] [TestNG-tests-2] [INFO] Senaryo Tamamlandı: TestFlight ile bir uygulamayı indirip aç => FAILED
+[01:35:26] [TestNG-tests-2] [INFO] ===== END TEST: TestFlight ile bir uygulamayı indirip aç =====
+[01:36:02] [TestNG-tests-3] [INFO] Senaryo Tamamlandı: TestFlight ile bir uygulamayı indirip aç => FAILED
+[01:36:02] [TestNG-tests-3] [INFO] ===== END TEST: TestFlight ile bir uygulamayı indirip aç =====

@@ -1,0 +1,5 @@
+[19:30:18] [main] [INFO] ===== START TEST: TestFlight ile bir uygulamayı indirip aç =====
+[19:30:18] [main] [INFO] Scenario Başlatıldı: TestFlight ile bir uygulamayı indirip aç
+[19:30:18] [main] [INFO] Env: local | Platform: ios | Device Index: 0
+[19:30:19] [main] [INFO] TestFlight açılıyor ve terminate+activate yapılıyor...
+[19:30:23] [main] [INFO] TestFlight içinde uygulama aranıyor: Geovision

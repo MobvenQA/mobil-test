@@ -1,0 +1,1 @@
+Env: cloud | Platform: ios | Device Index: 0 | AppKey: Sociable

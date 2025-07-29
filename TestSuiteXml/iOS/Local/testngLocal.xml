@@ -1,0 +1,14 @@
+<!DOCTYPE suite SYSTEM "https://testng.org/testng-1.0.dtd">
+<suite name="Mobile Automation Suite - Local iOS" verbose="1" parallel="false">
+    <parameter name="environment" value="local"/>
+    <parameter name="platform" value="ios"/>
+    <parameter name="appKey" value="Geovision"/>
+    <parameter name="deviceIndex" value="0"/>
+
+    <test name="iOS Local Single Device">
+        <classes>
+            <class name="stepDefinitions.SuiteHooks"/>
+            <class name="com.flick.runners.TestRunner"/>
+        </classes>
+    </test>
+</suite>

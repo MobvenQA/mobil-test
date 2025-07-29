@@ -1,0 +1,18 @@
+[19:38:19] [main] [INFO] ===== START TEST: TestFlight ile bir uygulamayı indirip aç =====
+[19:38:19] [main] [INFO] Scenario Başlatıldı: TestFlight ile bir uygulamayı indirip aç
+[19:38:19] [main] [INFO] Env: local | Platform: ios | Device Index: 0
+[19:38:20] [main] [INFO] TestFlight açılıyor ve terminate+activate yapılıyor...
+[19:38:21] [main] [WARN] ❌ Retry 1 failed: Error Domain=FBSOpenApplicationServiceErrorDomain Code=4 "The request to open "com.apple.TestFlight1" failed." UserInfo={BSErrorCodeDescription=InvalidRequest, NSLocalizedDescription=The request to open "com.apple.TestFlight1" failed., FBSOpenApplicationRequestID=0x7442, NSUnderlyingError=0x12e2c4930 {Error Domain=FBSOpenApplicationErrorDomain Code=4 "Application info provider (FBSApplicationLibrary) returned nil for "com.apple.TestFlight1"" UserInfo={BSErrorCodeDescription=NotFound, NSLocalizedFailureReason=Application info provider (FBSApplicationLibrary) returned nil for "com.apple.TestFlight1"}}}
+Build info: version: '4.15.0', revision: '1d14b5521b'
+System info: os.name: 'Mac OS X', os.arch: 'x86_64', os.version: '13.5.2', java.version: '11.0.15.1'
+Driver info: io.appium.java_client.ios.IOSDriver
+Command: [adb956ba-379c-4b64-ada8-d08b26b7b41e, activateApp {bundleId=com.apple.TestFlight1}]
+Capabilities {appium:automationName: XCUITest, appium:databaseEnabled: false, appium:deviceName: iPhone 14, appium:fullReset: false, appium:javascriptEnabled: true, appium:language: en, appium:locale: US, appium:locationContextEnabled: false, appium:networkConnectionEnabled: false, appium:noReset: true, appium:platformVersion: 18.5, appium:takesScreenshot: true, appium:udid: 00008110-001A55D83402601E, appium:wdaLocalPort: 8764, appium:webStorageEnabled: false, appium:webkitDebugProxyPort: 8765, platformName: IOS}
+Session ID: adb956ba-379c-4b64-ada8-d08b26b7b41e
+[19:38:25] [main] [WARN] ❌ Retry 2 failed: Error Domain=FBSOpenApplicationServiceErrorDomain Code=4 "The request to open "com.apple.TestFlight1" failed." UserInfo={BSErrorCodeDescription=InvalidRequest, NSLocalizedDescription=The request to open "com.apple.TestFlight1" failed., FBSOpenApplicationRequestID=0x684e, NSUnderlyingError=0x12dedd140 {Error Domain=FBSOpenApplicationErrorDomain Code=4 "Application info provider (FBSApplicationLibrary) returned nil for "com.apple.TestFlight1"" UserInfo={BSErrorCodeDescription=NotFound, NSLocalizedFailureReason=Application info provider (FBSApplicationLibrary) returned nil for "com.apple.TestFlight1"}}}
+Build info: version: '4.15.0', revision: '1d14b5521b'
+System info: os.name: 'Mac OS X', os.arch: 'x86_64', os.version: '13.5.2', java.version: '11.0.15.1'
+Driver info: io.appium.java_client.ios.IOSDriver
+Command: [adb956ba-379c-4b64-ada8-d08b26b7b41e, activateApp {bundleId=com.apple.TestFlight1}]
+Capabilities {appium:automationName: XCUITest, appium:databaseEnabled: false, appium:deviceName: iPhone 14, appium:fullReset: false, appium:javascriptEnabled: true, appium:language: en, appium:locale: US, appium:locationContextEnabled: false, appium:networkConnectionEnabled: false, appium:noReset: true, appium:platformVersion: 18.5, appium:takesScreenshot: true, appium:udid: 00008110-001A55D83402601E, appium:wdaLocalPort: 8764, appium:webStorageEnabled: false, appium:webkitDebugProxyPort: 8765, platformName: IOS}
+Session ID: adb956ba-379c-4b64-ada8-d08b26b7b41e

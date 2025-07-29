@@ -1,0 +1,30 @@
+[20:22:14] [TestNG-tests-1] [INFO] ===== START TEST: TestFlight ile bir uygulamayı indirip aç =====
+[20:22:14] [TestNG-tests-2] [INFO] ===== START TEST: TestFlight ile bir uygulamayı indirip aç =====
+[20:22:14] [TestNG-tests-3] [INFO] ===== START TEST: TestFlight ile bir uygulamayı indirip aç =====
+[20:22:14] [TestNG-tests-1] [INFO] Scenario Başlatıldı: TestFlight ile bir uygulamayı indirip aç
+[20:22:14] [TestNG-tests-3] [INFO] Scenario Başlatıldı: TestFlight ile bir uygulamayı indirip aç
+[20:22:14] [TestNG-tests-2] [INFO] Scenario Başlatıldı: TestFlight ile bir uygulamayı indirip aç
+[20:22:14] [TestNG-tests-1] [INFO] Env: cloud | Platform: ios | Device Index: 0 | AppKey: Playdate
+[20:22:14] [TestNG-tests-2] [INFO] Env: cloud | Platform: ios | Device Index: 1 | AppKey: Playdate
+[20:22:14] [TestNG-tests-3] [INFO] Env: cloud | Platform: ios | Device Index: 2 | AppKey: Playdate
+[20:22:17] [TestNG-tests-1] [INFO] TestFlight açılıyor ve terminate+activate yapılıyor...
+[20:22:24] [TestNG-tests-1] [INFO] TestFlight içinde uygulama aranıyor: Playdate - AI for Kids
+[20:22:27] [TestNG-tests-3] [INFO] TestFlight açılıyor ve terminate+activate yapılıyor...
+[20:22:29] [TestNG-tests-1] [INFO] ✅ App bulundu ve tıklandı: Playdate - AI for Kids
+[20:22:29] [TestNG-tests-1] [WARN] Mevcut kurulu uygulama kaldırılıyor (varsa): com.playdate.app
+[20:22:30] [TestNG-tests-1] [INFO] TestFlight Install akışı başlıyor...
+[20:22:32] [TestNG-tests-3] [INFO] TestFlight içinde uygulama aranıyor: Playdate - AI for Kids
+[20:22:36] [TestNG-tests-3] [INFO] ✅ App bulundu ve tıklandı: Playdate - AI for Kids
+[20:22:36] [TestNG-tests-3] [WARN] Mevcut kurulu uygulama kaldırılıyor (varsa): com.playdate.app
+[20:22:37] [TestNG-tests-3] [INFO] TestFlight Install akışı başlıyor...
+[20:22:45] [TestNG-tests-1] [INFO] Senaryo Tamamlandı: TestFlight ile bir uygulamayı indirip aç => FAILED
+[20:22:45] [TestNG-tests-1] [INFO] ===== END TEST: TestFlight ile bir uygulamayı indirip aç =====
+[20:22:56] [TestNG-tests-2] [INFO] TestFlight açılıyor ve terminate+activate yapılıyor...
+[20:23:01] [TestNG-tests-2] [INFO] TestFlight içinde uygulama aranıyor: Playdate - AI for Kids
+[20:23:05] [TestNG-tests-2] [INFO] ✅ App bulundu ve tıklandı: Playdate - AI for Kids
+[20:23:05] [TestNG-tests-2] [WARN] Mevcut kurulu uygulama kaldırılıyor (varsa): com.playdate.app
+[20:23:05] [TestNG-tests-2] [INFO] TestFlight Install akışı başlıyor...
+[20:23:08] [TestNG-tests-3] [INFO] Senaryo Tamamlandı: TestFlight ile bir uygulamayı indirip aç => FAILED
+[20:23:08] [TestNG-tests-3] [INFO] ===== END TEST: TestFlight ile bir uygulamayı indirip aç =====
+[20:23:20] [TestNG-tests-2] [INFO] Senaryo Tamamlandı: TestFlight ile bir uygulamayı indirip aç => FAILED
+[20:23:21] [TestNG-tests-2] [INFO] ===== END TEST: TestFlight ile bir uygulamayı indirip aç =====

@@ -1,0 +1,11 @@
+/Users/hakantektas/mobil-test/src/main/java/com/flick/runners/TestRunner.java
+/Users/hakantektas/mobil-test/src/main/java/com/flick/drivers/DriverFactory.java
+/Users/hakantektas/mobil-test/src/main/java/com/flick/utils/ScreenshotHelper.java
+/Users/hakantektas/mobil-test/src/main/java/com/flick/utils/TestUtils.java
+/Users/hakantektas/mobil-test/src/main/java/com/flick/pages/TestFlightPage.java
+/Users/hakantektas/mobil-test/src/main/java/com/flick/config/ConfigManager.java
+/Users/hakantektas/mobil-test/src/main/java/com/flick/App.java
+/Users/hakantektas/mobil-test/src/main/java/com/flick/capabilities/LocalCapabilities.java
+/Users/hakantektas/mobil-test/src/main/java/com/flick/utils/LoggerHelper.java
+/Users/hakantektas/mobil-test/src/main/java/com/flick/utils/LogLevel.java
+/Users/hakantektas/mobil-test/src/main/java/com/flick/capabilities/CloudCapabilities.java

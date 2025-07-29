@@ -1,0 +1,12 @@
+[19:23:26] [main] [INFO] ===== START TEST: TestFlight ile bir uygulamayı indirip aç =====
+[19:23:26] [main] [INFO] Scenario Başlatıldı: TestFlight ile bir uygulamayı indirip aç
+[19:23:26] [main] [INFO] Env: local | Platform: ios | Device Index: 0
+[19:23:26] [main] [ERROR] Senaryo başlatılamadı: JSONObject["platforms"] not found.
+[19:23:26] [main] [ERROR] Senaryo HATA ile tamamlandı: TestFlight ile bir uygulamayı indirip aç
+[19:23:26] [main] [INFO] ===== END TEST: TestFlight ile bir uygulamayı indirip aç =====
+[19:23:26] [main] [INFO] ===== START TEST: TestFlight ile bir uygulamayı indirip aç =====
+[19:23:26] [main] [INFO] Scenario Başlatıldı: TestFlight ile bir uygulamayı indirip aç
+[19:23:26] [main] [INFO] Env: local | Platform: ios | Device Index: 0
+[19:23:26] [main] [ERROR] Senaryo başlatılamadı: JSONObject["platforms"] not found.
+[19:23:26] [main] [ERROR] Senaryo HATA ile tamamlandı: TestFlight ile bir uygulamayı indirip aç
+[19:23:26] [main] [INFO] ===== END TEST: TestFlight ile bir uygulamayı indirip aç =====

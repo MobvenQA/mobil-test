@@ -1,0 +1,24 @@
+version: '3.7'
+
+services:
+  allure-api-2:
+    image: frankescobar/allure-docker-service
+    container_name: allure-api-2
+    ports:
+      - "8181:5050"
+    volumes:
+      - ${PWD}/projects:/app/projects
+    environment:
+      CHECK_RESULTS_EVERY_SECONDS: 60
+      KEEP_HISTORY: 1
+      KEEP_HISTORY_LATEST: 5
+
+  allure-ui:
+    image: frankescobar/allure-docker-service-ui
+    container_name: allure-ui-2
+    ports:
+      - "8282:5252"
+    environment:
+      ALLURE_DOCKER_PUBLIC_API_URL: http://localhost:8181
+    depends_on:
+      - allure-api-2
