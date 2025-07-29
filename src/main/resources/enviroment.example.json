@@ -1,0 +1,69 @@
+{
+  "environments": {
+    "local": {
+      "platforms": {
+        "ios": {
+          "language": "en",
+          "locale": "en",
+          "fullReset": false,
+          "noReset": true,
+          "app": "",
+          "devices": [
+            {
+              "deviceName": "iPhone Dummy",
+              "udid": "CHANGE_ME_UDID",
+              "platformVersion": "17.0",
+              "gw": 4723
+            }
+          ],
+          "apps": {
+            "Geovision": {
+              "bundleId": "com.apple.TestFlight",
+              "targetBundleId": "com.madduck.geovs",
+              "appName": "AI Photo Location Finder：GeoAI"
+            }
+          }
+        },
+        "android": {
+          "language": "en",
+          "locale": "en",
+          "devices": [
+            {
+              "deviceName": "Pixel Dummy",
+              "udid": "emulator-5554",
+              "platformVersion": "14",
+              "gw": 5001
+            }
+          ],
+          "apps": {}
+        }
+      }
+    },
+    "cloud": {
+      "momentum": {
+        "user": "you@example.com",
+        "token": "CHANGE_ME_TOKEN"
+      },
+      "platforms": {
+        "ios": {
+          "language": "en",
+          "locale": "US",
+          "fullReset": false,
+          "noReset": true,
+          "devices": [
+            { "deviceName": "", "udid": "", "gw": 4007 },
+            { "deviceName": "", "udid": "", "gw": 4011 },
+            { "deviceName": "", "udid": "", "gw": 4033 }
+          ],
+          "apps": {
+            "Playdate": {
+              "bundleId": "com.apple.TestFlight",
+              "targetBundleId": "com.playdate.app",
+              "appName": "Playdate - AI for Kids"
+            }
+          }
+        }
+      }
+    }
+  }
+}
