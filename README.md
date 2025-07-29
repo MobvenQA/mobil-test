@@ -1,25 +1,61 @@
 # Mobil Test Otomasyon Projesi
 
 ## Özellikler
-- **Java + Cucumber + TestNG + Appium** tabanlı mobil test otomasyonu
+- **Java 11 + Cucumber + TestNG + Appium** tabanlı mobil test otomasyonu
 - **iOS ve Android** desteği
 - **Local ve Cloud** (MomentumSuite) ortam desteği
 - **Tekli ve Paralel** test koşumu
 - **Port çakışması olmadan** paralel test desteği
 - **Allure raporlama** ve otomatik rapor gönderimi
+- **Docker** entegrasyonu ile Allure raporlama
+- **Proje bazlı** test yönetimi
 
 ---
 
 ## Klasör Yapısı
 
-- `src/main/java/com/flick/`  
-  - `drivers/`: ThreadLocal Appium driver yönetimi
-  - `capabilities/`: Cloud ve local için capability ayarları
-  - `config/`: Ortam, cihaz, app ve port yönetimi
-  - `runners/`: TestNG + Cucumber runner
-- `src/test/java/stepDefinitions/`: Hooks ve test adımları
-- `TestSuiteXml/`: TestNG XML dosyaları (tekli/paralel, local/cloud)
-- `src/main/resources/environment.json`: Cihaz, ortam ve port konfigürasyonu
+```
+mobil-test/
+├── projects/                    # Proje bazlı test yönetimi
+│   ├── default/                # Varsayılan proje
+│   └── madduck/               # Madduck projesi
+├── src/main/java/com/flick/
+│   ├── drivers/               # ThreadLocal Appium driver yönetimi
+│   ├── capabilities/          # Cloud ve local için capability ayarları
+│   ├── config/               # Ortam, cihaz, app ve port yönetimi
+│   ├── pages/                # Page Object Model
+│   ├── runners/              # TestNG + Cucumber runner
+│   └── utils/                # Yardımcı sınıflar
+├── src/test/java/
+│   ├── stepDefinitions/      # Hooks ve test adımları
+│   └── features/            # Cucumber feature dosyaları
+├── TestSuiteXml/            # TestNG XML dosyaları
+│   └── iOS/
+│       ├── Local/           # Local test konfigürasyonları
+│       └── Cloud/           # Cloud test konfigürasyonları
+├── docker-compose.yml       # Docker Allure servisleri
+└── send_result.sh          # Otomatik rapor gönderimi
+```
+
+---
+
+## Kurulum ve Başlangıç
+
+### 1. Gereksinimler
+- Java 11+
+- Maven 3.6+
+- Appium Server
+- iOS Simulator/Device (iOS testleri için)
+- Android Emulator/Device (Android testleri için)
+
+### 2. Konfigürasyon
+1. `src/main/resources/enviroment.example.json` dosyasını `environment.json` olarak kopyalayın
+2. Cihaz bilgilerinizi ve MomentumSuite token'ınızı güncelleyin
+3. Docker Compose ile Allure servislerini başlatın:
+
+```bash
+docker-compose up -d
+```
 
 ---
 
@@ -38,8 +74,8 @@
 mvn clean test -DsuiteXmlFile=TestSuiteXml/iOS/Cloud/testngCloudParallel.xml
 ```
 
-- Bu komut, ilgili XML’de tanımlı her cihaz/thread için tüm feature dosyalarını paralel olarak çalıştırır.
-- Eğer belirli feature dosyalarını çalıştırmak isterseniz, TestRunner veya XML’de `features` parametresini özelleştirebilirsiniz.
+- Bu komut, ilgili XML'de tanımlı her cihaz/thread için tüm feature dosyalarını paralel olarak çalıştırır.
+- Eğer belirli feature dosyalarını çalıştırmak isterseniz, TestRunner veya XML'de `features` parametresini özelleştirebilirsiniz.
 
 ### Feature Dosyası Ekleme
 
@@ -94,10 +130,63 @@ mvn clean test -DsuiteXmlFile=TestSuiteXml/iOS/Cloud/testngCloudParallel.xml
 
 ---
 
-## Raporlama
+## Docker ve Allure Raporlama
 
-- Testler sonunda Allure raporu otomatik oluşturulur ve `send_result.sh` ile gönderilir.
-- Raporlar `allure-results/` ve `target/` klasörlerinde tutulur.
+### Allure Servisleri
+Proje, Docker Compose ile Allure raporlama servislerini içerir:
+
+```bash
+# Allure servislerini başlat
+docker-compose up -d
+
+# Allure API: http://localhost:8181
+# Allure UI: http://localhost:8282
+```
+
+### Otomatik Rapor Gönderimi
+Testler tamamlandıktan sonra `send_result.sh` scripti ile raporlar otomatik olarak Allure servisine gönderilir:
+
+```bash
+./send_result.sh
+```
+
+Script şunları yapar:
+1. Allure sonuçlarını `projects/madduck/results/` klasörüne kopyalar
+2. Proje oluşturur (varsa hata vermez)
+3. Sonuçları Allure API'ye yükler
+4. Raporu oluşturur ve URL'yi gösterir
+
+---
+
+## Proje Bazlı Test Yönetimi
+
+Proje, farklı müşteriler/projeler için ayrı test yönetimi sağlar:
+
+- `projects/default/`: Varsayılan proje
+- `projects/madduck/`: Madduck projesi
+
+Her proje için ayrı:
+- Test konfigürasyonları
+- Rapor sonuçları
+- Allure proje ID'leri
+
+---
+
+## Bağımlılıklar
+
+### Ana Bağımlılıklar
+- **Java 11**: Temel Java sürümü
+- **Appium Java Client 9.0.0**: Mobil test otomasyonu
+- **Cucumber 7.14.0**: BDD test framework
+- **TestNG 7.8.0**: Test execution framework
+- **Selenium 4.15.0**: Web element etkileşimleri
+- **Allure 2.24.0**: Raporlama framework
+
+### Yardımcı Kütüphaneler
+- **Jackson 2.15.0**: JSON işlemleri
+- **Gson 2.10.1**: JSON parsing
+- **OkHttp 4.12.0**: HTTP client
+- **JSON 20231013**: JSON işlemleri
 
 ---
 
@@ -112,13 +201,31 @@ mvn clean test -DsuiteXmlFile=TestSuiteXml/iOS/Cloud/testngCloudParallel.xml
 ### S: Tekli ve paralel testler arasında fark var mı?
 **Evet.** Paralel testlerde her test için farklı cihaz ve port atanır, tekli testte tek cihaz kullanılır.
 
+### S: Docker olmadan çalışabilir mi?
+**Evet.** Allure raporlarını local olarak da oluşturabilirsiniz, ancak Docker ile daha kolay yönetim sağlanır.
+
 ---
 
 ## Geliştirici Notları
 
-- Yeni cihaz eklemek için environment.json'a cihaz bilgisi ve gw portu eklenmelidir.
-- Yeni app eklemek için ilgili platform altında apps objesine ekleme yapılmalıdır.
-- Cloud ortamı için MomentumSuite kullanıcı ve token bilgisi güncellenmelidir.
+### Yeni Cihaz Ekleme
+1. `environment.json` dosyasında ilgili platform altına cihaz bilgisi ekleyin
+2. `gw` portunu benzersiz olacak şekilde ayarlayın
+3. UDID ve platform version bilgilerini güncelleyin
+
+### Yeni App Ekleme
+1. `environment.json` dosyasında ilgili platform altındaki `apps` objesine ekleme yapın
+2. Bundle ID, target bundle ID ve app name bilgilerini girin
+
+### Cloud Ortamı Konfigürasyonu
+1. MomentumSuite kullanıcı ve token bilgilerini güncelleyin
+2. Cloud cihaz listesini kontrol edin
+3. Cloud capabilities ayarlarını kontrol edin
+
+### Yeni Proje Ekleme
+1. `projects/` klasörü altında yeni proje klasörü oluşturun
+2. `send_result.sh` scriptinde `PROJECT_ID` değişkenini güncelleyin
+3. Proje özel konfigürasyonları ekleyin
 
 ---
 
