@@ -1,11 +1,15 @@
-Feature: TestFlight üzerinden uygulama indirme ve açma
+@testflight @ios @cloud
+Feature: TestFlight üzerinden uygulama kurulumu ve açılışı
 
-  @testflight
   Scenario Outline: TestFlight ile bir uygulamayı indirip aç
-    Given cihaz "<platform>" üzerinde TestFlight açılır
-    When appKey "<appKey>" ile uygulama TestFlight üzerinden yüklenir
-    Then uygulama başarıyla açılır ve doğrulanır
+    Given TestFlight açılır ve "<bundleId>" terminate & activate edilir
+    When "<appKey>" uygulaması TestFlight'ta aranır ve bulunursa tıklanır
+    And Hedef uygulama "<targetBundleId>" yüklü ise kaldırılır
+    And Install butonuna basılır ve yükleme tamamlanır
+    And OPEN butonuna basılarak uygulama açılır
+    Then "<appKey>" uygulamasının başarıyla açıldığı doğrulanır
 
     Examples:
-      | platform | appKey     |
-      | ios      | sampleApp  |
+      | appKey     | bundleId              | targetBundleId                |
+      | Sociable - Video Chat & Games   | com.apple.TestFlight  | com.forplay.app             |
+
