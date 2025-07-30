@@ -1,0 +1,1 @@
+Scenario END  : TestFlight ile bir uygulamayı indirip aç => PASSED

@@ -1,0 +1,1 @@
+Buton bulundu ve tıklanıyor: By.xpath: //*[contains(@name,'Start Free Trial') or contains(@value,'Start Free Trial') or contains(@label,'Start Free Trial')]

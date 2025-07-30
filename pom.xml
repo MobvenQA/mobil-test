@@ -120,6 +120,18 @@
           <artifactId>okhttp</artifactId>
           <version>4.12.0</version>
       </dependency>
+      <!-- ExtentReports -->
+      <dependency>
+          <groupId>tech.grasshopper</groupId>
+          <artifactId>extentreports-cucumber7-adapter</artifactId>
+          <version>1.14.0</version> <!-- Son sürüm -->
+      </dependency>
+      <dependency>
+          <groupId>com.aventstack</groupId>
+          <artifactId>extentreports</artifactId>
+          <version>5.1.1</version> <!-- ExtentReports core -->
+      </dependency>
+
   </dependencies><build>
     <plugins>
         <plugin>

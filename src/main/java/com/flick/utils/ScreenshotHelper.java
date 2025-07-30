@@ -7,6 +7,7 @@ import org.openqa.selenium.WebDriver;
 
 import java.awt.image.BufferedImage;
 import java.io.ByteArrayInputStream;
+import java.io.ByteArrayOutputStream;
 import java.io.File;
 import java.io.FileOutputStream;
 import java.text.SimpleDateFormat;
@@ -136,6 +137,39 @@ public class ScreenshotHelper {
 
             Allure.addAttachment("[" + level + "] " + stepName,
                     "image/jpeg", new ByteArrayInputStream(baos.toByteArray()), ".jpg");
+        } catch (Exception e) {
+            Allure.addAttachment("[" + level + "] " + stepName,
+                    "text/plain", new ByteArrayInputStream(("Screenshot alınamadı: " + e.getMessage()).getBytes()), ".txt");
+        }
+    }
+    public static void captureAndAttachScaled(WebDriver driver, String stepName, LogLevel level, int maxWidth) {
+        if (driver == null) {
+            Allure.addAttachment("[" + level + "] " + stepName,
+                    "text/plain", new ByteArrayInputStream("WebDriver null".getBytes()), ".txt");
+            return;
+        }
+        try {
+            byte[] png = ((TakesScreenshot) driver).getScreenshotAs(OutputType.BYTES);
+            BufferedImage img = javax.imageio.ImageIO.read(new java.io.ByteArrayInputStream(png));
+
+            // Genişliği sınırlayarak ölçekle
+            if (maxWidth > 0 && img.getWidth() > maxWidth) {
+                int newW = maxWidth;
+                int newH = (int) ((double) img.getHeight() * newW / img.getWidth());
+                java.awt.Image tmp = img.getScaledInstance(newW, newH, java.awt.Image.SCALE_SMOOTH);
+                BufferedImage scaled = new BufferedImage(newW, newH, BufferedImage.TYPE_INT_RGB);
+                java.awt.Graphics2D g2 = scaled.createGraphics();
+                g2.drawImage(tmp, 0, 0, null);
+                g2.dispose();
+                img = scaled;
+            }
+
+            // PNG olarak ekle (daha kaliteli)
+            ByteArrayOutputStream baos = new ByteArrayOutputStream();
+            javax.imageio.ImageIO.write(img, "png", baos);
+
+            Allure.addAttachment("[" + level + "] " + stepName,
+                    "image/png", new ByteArrayInputStream(baos.toByteArray()), ".png");
         } catch (Exception e) {
             Allure.addAttachment("[" + level + "] " + stepName,
                     "text/plain", new ByteArrayInputStream(("Screenshot alınamadı: " + e.getMessage()).getBytes()), ".txt");

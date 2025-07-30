@@ -3,12 +3,15 @@
     <parameter name="environment" value="cloud"/>
     <parameter name="platform" value="ios"/>
     <parameter name="appKey" value="Playdate"/>
+    <listeners>
+        <listener class-name="io.qameta.allure.testng.AllureTestNg" />
+    </listeners>
 
     <!-- Device 0: TestFlight -->
     <test name="Device-0 - TestFlight">
         <parameter name="deviceIndex" value="0"/>
         <classes>
-            <class name="stepDefinitions.SuiteHooks"/> <!-- Driver bir kez açılır -->
+            <class name="hooks.SuiteHooks"/> <!-- Driver bir kez açılır -->
             <class name="com.flick.runners.TestRunner"/> <!-- testFlight ve onboard sırayla -->
         </classes>
     </test>
@@ -17,7 +20,7 @@
     <test name="Device-1 - Onboarding">
         <parameter name="deviceIndex" value="1"/>
             <classes>
-                <class name="stepDefinitions.SuiteHooks"/> <!-- Driver bir kez açılır -->
+                <class name="hooks.SuiteHooks"/> <!-- Driver bir kez açılır -->
                 <class name="com.flick.runners.TestRunner"/> <!-- testFlight ve onboard sırayla -->
             </classes>
     </test>
@@ -26,7 +29,7 @@
     <test name="Device-2 - TestFlight">
         <parameter name="deviceIndex" value="2"/>
         <classes>
-            <class name="stepDefinitions.SuiteHooks"/> <!-- Driver bir kez açılır -->
+            <class name="hooks.SuiteHooks"/> <!-- Driver bir kez açılır -->
             <class name="com.flick.runners.TestRunner"/> <!-- testFlight ve onboard sırayla -->
         </classes>
     </test>
@@ -36,7 +39,7 @@
     <test name="Device-3 - TestFlight">
         <parameter name="deviceIndex" value="0"/>
         <classes>
-            <class name="stepDefinitions.SuiteHooks"/> <!-- Driver bir kez açılır -->
+            <class name="hooks.SuiteHooks"/> <!-- Driver bir kez açılır -->
             <class name="com.flick.runners.TestRunner"/> <!-- testFlight ve onboard sırayla -->
         </classes>
     </test>
@@ -45,7 +48,7 @@
     <test name="Device-4 - Onboarding">
         <parameter name="deviceIndex" value="1"/>
         <classes>
-            <class name="stepDefinitions.SuiteHooks"/> <!-- Driver bir kez açılır -->
+            <class name="hooks.SuiteHooks"/> <!-- Driver bir kez açılır -->
             <class name="com.flick.runners.TestRunner"/> <!-- testFlight ve onboard sırayla -->
         </classes>
     </test>
@@ -54,7 +57,7 @@
     <test name="Device-5 - TestFlight">
         <parameter name="deviceIndex" value="2"/>
         <classes>
-            <class name="stepDefinitions.SuiteHooks"/> <!-- Driver bir kez açılır -->
+            <class name="hooks.SuiteHooks"/> <!-- Driver bir kez açılır -->
             <class name="com.flick.runners.TestRunner"/> <!-- testFlight ve onboard sırayla -->
         </classes>
     </test>

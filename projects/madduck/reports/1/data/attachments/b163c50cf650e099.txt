@@ -1,0 +1,1 @@
+Intro swipes sırasında uyarı: Failed to get valid screen dimensions after retries

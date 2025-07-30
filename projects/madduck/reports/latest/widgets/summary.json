@@ -1,1 +1,1 @@
-{"reportName":"madduck","testRuns":[],"statistic":{"failed":0,"broken":0,"skipped":0,"passed":4,"unknown":0,"total":4},"time":{"start":1753859486210,"stop":1753859673517,"duration":187307,"minDuration":51999,"maxDuration":134975,"sumDuration":374222}}
+{"reportName":"madduck","testRuns":[],"statistic":{"failed":0,"broken":1,"skipped":0,"passed":4,"unknown":0,"total":5},"time":{"start":1753864684436,"stop":1753865770098,"duration":1085662,"minDuration":1,"maxDuration":100782,"sumDuration":295576}}

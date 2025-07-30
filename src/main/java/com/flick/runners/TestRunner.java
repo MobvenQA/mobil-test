@@ -11,8 +11,10 @@ import java.util.Arrays;
         features = "src/test/java/features",
         glue = {"stepDefinitions"},
         plugin = {
-                "pretty",
-                "io.qameta.allure.cucumber7jvm.AllureCucumber7Jvm"
+                "pretty",  // Konsola renkli çıktı
+                "html:target/cucumber-reports/cucumber.html",  // Klasik HTML raporu
+                "json:target/cucumber-reports/cucumber.json",  // JSON raporu (Allure için de kullanılabilir)
+                "io.qameta.allure.cucumber7jvm.AllureCucumber7Jvm"  // Allure raporu
         },
         publish = false
 )
@@ -23,6 +25,7 @@ public class TestRunner extends AbstractTestNGCucumberTests {
         return super.scenarios();
     }
 }
+
 
 
 /* Cucumber da sıralaı olarak feature dosyalarını run edebilmek için kodsal çözüm ama her feature dosyasına 01,02 gibi sıralama vererek bu kod şuan kullanmıyoruz

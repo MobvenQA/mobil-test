@@ -5,6 +5,7 @@ import com.flick.pages.TestFlightPage;
 import com.flick.utils.LoggerHelper;
 import com.flick.utils.LogLevel;
 import io.cucumber.java.en.*;
+import io.qameta.allure.Allure;
 
 public class TestFlightSteps {
 
@@ -18,6 +19,7 @@ public class TestFlightSteps {
     public void testflightOpen(String bundleId) {
         LoggerHelper.log(LogLevel.INFO, "TestFlight açılıyor ve terminate+activate yapılıyor...");
         testFlightPage.openTestFlight(bundleId);
+        Allure.step("TestFlight açılır ve {string} terminate & activate edilir");
         //testFlightPage.handlePermissions();
     }
 
@@ -30,18 +32,21 @@ public class TestFlightSteps {
         // ConfigManager'dan appName al (SuiteHooks appKey set ettiği için güvenilir)
         String appName = ConfigManager.getAppName();
         testFlightPage.searchAndTapApp(appName != null ? appName : appKey);
+        Allure.step("{string} uygulaması TestFlight'ta aranır ve bulunursa tıklanır");
     }
 
     @And("Hedef uygulama {string} yüklü ise kaldırılır")
     public void uninstallIfPresent(String targetBundleId) {
         LoggerHelper.log(LogLevel.WARN, "Mevcut kurulu uygulama kaldırılıyor (varsa): " + targetBundleId);
         testFlightPage.uninstallAppIfPresent(targetBundleId);
+        Allure.step("Hedef uygulama {string} yüklü ise kaldırılır");
     }
 
     @And("Install butonuna basılır ve yükleme tamamlanır")
     public void installApp() {
         LoggerHelper.log(LogLevel.INFO, "TestFlight Install akışı başlıyor...");
         testFlightPage.clickInstall();
+        Allure.step("Install butonuna basılır ve yükleme tamamlanır");
     }
 
     @And("OPEN butonuna basılarak uygulama açılır")
@@ -49,6 +54,7 @@ public class TestFlightSteps {
 
         LoggerHelper.log(LogLevel.INFO, "OPEN butonu bekleniyor ve tıklanıyor...");
         testFlightPage.waitForAndClickOpen();
+        Allure.step("OPEN butonuna basılarak uygulama açılır");
     }
 
     @Then("{string} uygulamasının başarıyla açıldığı doğrulanır")
@@ -57,5 +63,6 @@ public class TestFlightSteps {
         String appName = ConfigManager.getAppName();
         testFlightPage.verifyApp(appName != null ? appName : appKey);
         LoggerHelper.log(LogLevel.INFO, "Doğrulama tamamlandı: " + appKey);
+        Allure.step("{string} uygulamasının başarıyla açıldığı doğrulanır");
     }
 }

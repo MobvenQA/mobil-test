@@ -58,7 +58,7 @@
           "noReset": true,
           "devices": [
 
-            { "deviceName": "", "udid": "", "gw": 4007 },
+            { "deviceName": "", "udid": "", "gw": 4033 },
             { "deviceName": "", "udid": "", "gw": 4011 },
             { "deviceName": "", "udid": "", "gw": 4033 },
             { "deviceName": "", "udid": "", "gw": 4040 },

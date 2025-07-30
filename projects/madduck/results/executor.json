@@ -1,1 +1,1 @@
-{ "reportName": "madduck", "buildName": "madduck #3", "buildOrder": "3", "name": "execution_from_script", "reportUrl": "../3/index.html", "buildUrl": "http://localhost:8282", "type": "manual" }
+{ "reportName": "madduck", "buildName": "madduck #4", "buildOrder": "4", "name": "Automatic Execution", "reportUrl": "../4/index.html", "buildUrl": "", "type": "another" }

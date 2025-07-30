@@ -5,11 +5,14 @@
     <parameter name="platform" value="ios"/>
     <parameter name="appKey" value="Playdate"/>
     <parameter name="deviceIndex" value="0"/>
+    <listeners>
+        <listener class-name="io.qameta.allure.testng.AllureTestNg" />
+    </listeners>
 
     <!-- Tüm feature’ları tek session ile sırayla koşar -->
     <test name="All Features Sequential">
         <classes>
-            <class name="stepDefinitions.SuiteHooks"/> <!-- Driver bir kez açılır -->
+            <class name="hooks.SuiteHooks"/> <!-- Driver bir kez açılır -->
             <class name="com.flick.runners.TestRunner"/> <!-- testFlight ve onboard sırayla -->
         </classes>
     </test>

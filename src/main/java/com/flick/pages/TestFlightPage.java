@@ -63,7 +63,8 @@ public class TestFlightPage {
                 driver.activateApp(bundleId);
                 new WebDriverWait(driver, Duration.ofSeconds(20))
                         .until(d -> d.getPageSource() != null);
-                ScreenshotHelper.captureAndAttach(driver, "openTestFlight", LogLevel.INFO);
+                ScreenshotHelper.captureAndAttachScaled(DriverFactory.getDriver(),"openTestFlight", LogLevel.INFO, 600);
+
                 return;
             } catch (Exception e) {
                 LoggerHelper.log(LogLevel.WARN,
@@ -98,8 +99,8 @@ public class TestFlightPage {
             currentScroll++;
             if (currentScroll == maxScrolls) direction = TestUtils.SwipeDirection.DOWN;
         }
+        ScreenshotHelper.captureAndAttachScaled(DriverFactory.getDriver(),"App not found", LogLevel.INFO, 600);
 
-        ScreenshotHelper.captureAndAttach(driver, "App not found", LogLevel.ERROR);
         throw new Exception("❌ App not found: " + targetAppName);
     }
 

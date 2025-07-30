@@ -1,4 +1,4 @@
 "Epic","Feature","Story","FAILED","BROKEN","PASSED","SKIPPED","UNKNOWN"
-"","","","0","0","2","0","0"
-"","TestFlight üzerinden uygulama kurulumu ve açılışı","TestFlight ile bir uygulamayı indirip aç","0","0","1","0","0"
+"","","","0","1","2","0","0"
 "","Onboarding Sürecini Tamamlama","Kullanıcı onboarding akışını tamamlar ve uygulamayı açar","0","0","1","0","0"
+"","TestFlight üzerinden uygulama kurulumu ve açılışı","TestFlight ile bir uygulamayı indirip aç","0","0","1","0","0"
