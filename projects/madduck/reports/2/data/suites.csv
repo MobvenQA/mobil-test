@@ -1,0 +1,5 @@
+"Status","Start Time","Stop Time","Duration in ms","Parent Suite","Suite","Sub Suite","Test Class","Test Method","Name","Description"
+"passed","Wed Jul 30 07:11:26 UTC 2025","Wed Jul 30 07:12:18 UTC 2025","51999","","TestFlight üzerinden uygulama kurulumu ve açılışı","","TestFlight ile bir uygulamayı indirip aç","","TestFlight ile bir uygulamayı indirip aç",""
+"passed","Wed Jul 30 07:12:18 UTC 2025","Wed Jul 30 07:14:33 UTC 2025","134975","Cloud iOS - Sequential","All Features Sequential","com.flick.runners.TestRunner","com.flick.runners.TestRunner","runScenario","Runs Cucumber Scenarios",""
+"passed","Wed Jul 30 07:12:18 UTC 2025","Wed Jul 30 07:14:33 UTC 2025","134932","","Onboarding Sürecini Tamamlama","","Kullanıcı onboarding akışını tamamlar ve uygulamayı açar","","Kullanıcı onboarding akışını tamamlar ve uygulamayı açar",""
+"passed","Wed Jul 30 07:11:26 UTC 2025","Wed Jul 30 07:12:18 UTC 2025","52316","Cloud iOS - Sequential","All Features Sequential","com.flick.runners.TestRunner","com.flick.runners.TestRunner","runScenario","Runs Cucumber Scenarios",""

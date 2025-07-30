@@ -1,0 +1,1 @@
+Scenario END  : Kullanıcı onboarding akışını tamamlar ve uygulamayı açar => PASSED

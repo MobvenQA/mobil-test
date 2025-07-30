@@ -1,0 +1,1 @@
+===== START TEST: Kullanıcı onboarding akışını tamamlar ve uygulamayı açar =====

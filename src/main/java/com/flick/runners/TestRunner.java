@@ -6,6 +6,26 @@ import org.testng.annotations.DataProvider;
 
 import java.util.Arrays;
 
+
+@CucumberOptions(
+        features = "src/test/java/features",
+        glue = {"stepDefinitions"},
+        plugin = {
+                "pretty",
+                "io.qameta.allure.cucumber7jvm.AllureCucumber7Jvm"
+        },
+        publish = false
+)
+public class TestRunner extends AbstractTestNGCucumberTests {
+    @Override
+    @DataProvider(parallel = false) // Seri çalıştırma
+    public Object[][] scenarios() {
+        return super.scenarios();
+    }
+}
+
+
+/* Cucumber da sıralaı olarak feature dosyalarını run edebilmek için kodsal çözüm ama her feature dosyasına 01,02 gibi sıralama vererek bu kod şuan kullanmıyoruz
 @CucumberOptions(
         features = {
                 "src/test/java/features/testFlight.feature",
@@ -16,7 +36,8 @@ import java.util.Arrays;
                 "pretty",
                 "io.qameta.allure.cucumber7jvm.AllureCucumber7Jvm"
         },
-        publish = false
+        publish = false,
+        monochrome = false
 )
 public class TestRunner extends AbstractTestNGCucumberTests {
 
@@ -40,3 +61,4 @@ public class TestRunner extends AbstractTestNGCucumberTests {
                 return scenarios;
         }
 }
+*/

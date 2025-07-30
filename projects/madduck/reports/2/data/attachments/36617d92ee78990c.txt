@@ -1,0 +1,1 @@
+Toplam tıklanan buton sayısı: 2
