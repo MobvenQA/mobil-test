@@ -43,6 +43,6 @@ logs/
 # Büyük ikili dosyalar (opsiyonel; LFS kullanmayacaksanız ignore edin)
 *.apk
 *.ipa
-
+* logs
 # Kaynaklardaki gizli config
-src/test/resources/environment.json
+* src/test/resources/environment.json
