@@ -11,4 +11,4 @@ Feature: TestFlight üzerinden uygulama kurulumu ve açılışı
 
     Examples:
       | appKey                  | bundleId               | targetBundleId     |
-      | Playdate - AI for Kids  | com.apple.TestFlight   | com.madduck.playdate   |
+      | Call recorder - Rink  | com.apple.TestFlight   | com.madduck.callrecorder   |

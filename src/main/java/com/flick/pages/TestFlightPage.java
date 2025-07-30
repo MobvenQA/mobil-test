@@ -61,7 +61,7 @@ public class TestFlightPage {
                 driver.terminateApp(bundleId);
                 Thread.sleep(1000);
                 driver.activateApp(bundleId);
-                new WebDriverWait(driver, Duration.ofSeconds(20))
+                new WebDriverWait(driver, Duration.ofSeconds(10))
                         .until(d -> d.getPageSource() != null);
                 ScreenshotHelper.captureAndAttachScaled(DriverFactory.getDriver(),"openTestFlight", LogLevel.INFO, 600);
 

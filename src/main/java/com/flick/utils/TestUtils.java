@@ -133,7 +133,6 @@ public class TestUtils {
     public void handlePopups(String[] popupSelectors,int timeoutMillis, int intervalMillis) {
 
 
-
         for (String selector : popupSelectors) {
             long startTime = System.currentTimeMillis();
             boolean elementFound = false;
@@ -453,7 +452,6 @@ public class TestUtils {
                 lastError
         );
     }
-
     public boolean waitUntilVisible(By locator, int timeoutInSeconds) {
         try {
             new WebDriverWait(driver, Duration.ofSeconds(timeoutInSeconds))

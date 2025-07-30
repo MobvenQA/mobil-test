@@ -23,10 +23,10 @@
             }
           ],
           "apps": {
-            "Playdate": {
+            "Callrecorder": {
               "bundleId": "com.apple.TestFlight",
-              "targetBundleId": "com.madduck.playdate",
-              "appName": "Playdate - AI for Kids"
+              "targetBundleId": "com.madduck.callrecorder",
+              "appName": "Call recorder - Rink"
             }
           }
         },

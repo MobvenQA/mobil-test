@@ -1,0 +1,1 @@
+Env=local Platform=ios AppKey=Callrecorder DeviceIndex=0

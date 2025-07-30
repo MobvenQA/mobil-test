@@ -1,1 +1,0 @@
-Scenario START: TestFlight ile bir uygulamayı indirip aç

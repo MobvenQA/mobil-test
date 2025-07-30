@@ -6,6 +6,7 @@ import com.flick.utils.LogLevel;
 import com.flick.utils.LoggerHelper;
 import com.flick.utils.ScreenshotHelper;
 import io.cucumber.java.*;
+import io.qameta.allure.Allure;
 
 public class Hooks {
 
@@ -13,33 +14,38 @@ public class Hooks {
     public void beforeScenario(Scenario scenario) {
         LoggerHelper.startTestLog(scenario.getName());
         LoggerHelper.log(LogLevel.INFO, "Scenario START: " + scenario.getName());
-        new TestFlightPage().handlePermissions();
+        Allure.step("Scenario START: " + scenario.getName());
 
+        // TestFlight izin ekranlarını senaryo başında temizle
+        new TestFlightPage().handlePermissions();
     }
 
     @After
     public void afterScenario(Scenario scenario) {
         LoggerHelper.log(LogLevel.INFO,
-                "Scenario END  : " + scenario.getName() + " => " + scenario.getStatus());
+                "Scenario END: " + scenario.getName() + " => " + scenario.getStatus());
+        Allure.step("Scenario END: " + scenario.getName() + " => " + scenario.getStatus());
 
         if (scenario.isFailed() && DriverFactory.getDriver() != null) {
-            ScreenshotHelper.captureAndAttachScaled(DriverFactory.getDriver(), scenario.getName(), LogLevel.ERROR, 600);
-
+            ScreenshotHelper.captureAndAttachScaled(
+                    DriverFactory.getDriver(),
+                    scenario.getName(),
+                    LogLevel.ERROR,
+                    600
+            );
         }
+
         LoggerHelper.endTestLog(scenario.getName());
-        // Driver kapatma SuiteHooks’ta (suite-scope)
     }
 
     @BeforeStep
     public void beforeStep() {
-        // Her adımda popup temizleme güvenli şekilde
         if (DriverFactory.getDriver() != null) {
             try {
-                // TestFlightPage artık AppKey olmadan çağrılabilir (handlePermissions statik/metot)
-                //new TestFlightPage().handlePermissions();
+                // Popup dismiss işlemleri
+                // new TestFlightPage().handlePermissions();
             } catch (Exception e) {
-                LoggerHelper.log(LogLevel.WARN,
-                        "[PopupDismiss] Hata (önemsiz): " + e.getMessage());
+                LoggerHelper.log(LogLevel.WARN, "[PopupDismiss] Hata (önemsiz): " + e.getMessage());
             }
         }
     }
@@ -47,8 +53,13 @@ public class Hooks {
     @AfterStep
     public void afterStep(Scenario scenario) {
         if (DriverFactory.getDriver() != null) {
-            ScreenshotHelper.captureAndAttachScaled(DriverFactory.getDriver(), scenario.getName(), LogLevel.INFO, 600);
-
+            Allure.step("After step: " + scenario.getName());
+            ScreenshotHelper.captureAndAttachScaled(
+                    DriverFactory.getDriver(),
+                    scenario.getName(),
+                    LogLevel.INFO,
+                    600
+            );
         }
     }
 }

@@ -15,8 +15,7 @@ if [ ! -d "$ALLURE_RESULTS_DIR" ]; then
   exit 1
 fi
 
-# 1. Hedef klasörü temizle ve yeniden oluştur
-rm -rf "$TARGET_RESULTS_DIR"
+# 1. Hedef klasörü oluştur (silme yok, geçmişi koru)
 mkdir -p "$TARGET_RESULTS_DIR"
 
 # 2. Sonuçları kopyala
@@ -27,7 +26,7 @@ curl -X POST "$ALLURE_API/allure-docker-service/projects" \
      -H "Content-Type: application/json" \
      -d "{\"id\":\"$PROJECT_ID\"}" -ik
 
-# 4. Sonuçları yükle (eval kullanmadan güvenli biçimde)
+# 4. Sonuçları yükle
 echo "📤 Sonuçlar gönderiliyor..."
 for file in "$TARGET_RESULTS_DIR"/*; do
   curl -X POST "$ALLURE_API/allure-docker-service/send-results?project_id=$PROJECT_ID" \
@@ -35,16 +34,17 @@ for file in "$TARGET_RESULTS_DIR"/*; do
        -F "files[]=@$file" -ik
 done
 
-# 5. Raporu oluştur (tek çağrı, timeout ekli)
-EXECUTION_NAME="execution_from_script"
+# 5. Her çalıştırmaya benzersiz bir execution adı ver
+EXECUTION_NAME="execution_$(date +%Y%m%d_%H%M%S)"
 EXECUTION_FROM="$ALLURE_UI"
 EXECUTION_TYPE="manual"
 
+# 6. Rapor oluştur
 echo "------------------GENERATE-REPORT------------------"
 RESPONSE=$(curl --max-time 60 -X GET \
   "$ALLURE_API/allure-docker-service/generate-report?project_id=$PROJECT_ID&execution_name=$EXECUTION_NAME&execution_from=$EXECUTION_FROM&execution_type=$EXECUTION_TYPE" -ik)
 
-# 6. Report URL çıkar
+# 7. Report URL çıkar
 ALLURE_REPORT=$(grep -o '"report_url":"[^"]*' <<< "$RESPONSE" | grep -o '[^\"]*$')
 echo "📊 Allure UI URL: $ALLURE_UI"
 echo "📊 Allure Report URL: $ALLURE_REPORT"

@@ -4,6 +4,9 @@
     <parameter name="platform" value="ios"/>
     <parameter name="appKey" value="Playdate"/>
     <parameter name="deviceIndex" value="0"/>
+    <listeners>
+        <listener class-name="io.qameta.allure.testng.AllureTestNg" />
+    </listeners>
 
     <!-- Tüm feature’ları tek session ile sırayla koşar -->
     <test name="All Features Sequential">

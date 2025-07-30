@@ -1,0 +1,1 @@
+Buton bulundu ve tıklanıyor: By.xpath: //XCUIElementTypeStaticText[@name='SIGN UP / LOGIN WITH APPLE']
