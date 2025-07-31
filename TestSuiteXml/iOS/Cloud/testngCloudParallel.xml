@@ -4,7 +4,7 @@
     <test name="Cloud iOS Device 1">
         <parameter name="environment" value="cloud"/>
         <parameter name="platform" value="ios"/>
-        <parameter name="appKey" value="Sociable"/>
+        <parameter name="appKey" value="Geovision"/>
         <parameter name="deviceIndex" value="0"/>
         <classes>
             <class name="stepDefinitions.SuiteHooks"/>
@@ -15,7 +15,7 @@
     <test name="Cloud iOS Device 2">
         <parameter name="environment" value="cloud"/>
         <parameter name="platform" value="ios"/>
-        <parameter name="appKey" value="Sociable"/>
+        <parameter name="appKey" value="Geovision"/>
         <parameter name="deviceIndex" value="1"/>
         <classes>
             <class name="stepDefinitions.SuiteHooks"/>
@@ -26,7 +26,7 @@
     <test name="Cloud iOS Device 3">
         <parameter name="environment" value="cloud"/>
         <parameter name="platform" value="ios"/>
-        <parameter name="appKey" value="Sociable"/>
+        <parameter name="appKey" value="Geovision"/>
         <parameter name="deviceIndex" value="2"/>
         <classes>
             <class name="stepDefinitions.SuiteHooks"/>

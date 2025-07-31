@@ -1,11 +1,13 @@
 package stepDefinitions;
 
 import com.flick.config.ConfigManager;
+import com.flick.drivers.DriverFactory;
 import com.flick.utils.LogLevel;
 import com.flick.utils.LoggerHelper;
 import org.testng.annotations.*;
 
 import java.io.IOException;
+import java.net.MalformedURLException;
 import java.nio.file.Files;
 import java.nio.file.Paths;
 
@@ -16,7 +18,7 @@ public class SuiteHooks {
     public void beforeEachTest(@Optional("local") String envParam,
                                @Optional("ios")   String platformParam,
                                @Optional("sampleApp") String appKeyParam,
-                               @Optional("0")     String deviceIndexParam) {
+                               @Optional("0")     String deviceIndexParam) throws MalformedURLException {
 
         // CLI (-D...) varsa onu kullan; yoksa XML parametreleri
         String environment = System.getProperty("environment", envParam).toLowerCase();
@@ -34,6 +36,7 @@ public class SuiteHooks {
         LoggerHelper.log(LogLevel.INFO, "AppKey     : " + appKey);
         LoggerHelper.log(LogLevel.INFO, "DeviceIndex: " + deviceIndex);
         LoggerHelper.log(LogLevel.INFO, "===========================================");
+        DriverFactory.initDriver();
     }
 
     @AfterSuite(alwaysRun = true)
@@ -51,6 +54,7 @@ public class SuiteHooks {
             System.err.println("❌ Allure script başarısız çıktı kodu: " + exitCode);
         }
 
+        DriverFactory.quitDriver();
         Files.list(Paths.get("allure-results")).forEach(System.out::println);
     }
 }

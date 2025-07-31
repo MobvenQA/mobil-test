@@ -11,7 +11,7 @@ services:
     environment:
       CHECK_RESULTS_EVERY_SECONDS: 60
       KEEP_HISTORY: 1
-      KEEP_HISTORY_LATEST: 5
+      KEEP_HISTORY_LATEST: 1
 
   allure-ui:
     image: frankescobar/allure-docker-service-ui

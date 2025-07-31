@@ -64,10 +64,10 @@
             { "deviceName": "", "udid": "", "gw": 4002 }
           ],
           "apps": {
-            "Sociable": {
+            "Geovision": {
               "bundleId": "com.apple.TestFlight",
-              "appName": "Sociable - Video Chat & Games",
-              "targetBundleId": "com.forplay.app"
+              "targetBundleId": "com.madduck.geovs",
+              "appName": "AI Photo Location Finder：GeoAI"
             }
           }
         }

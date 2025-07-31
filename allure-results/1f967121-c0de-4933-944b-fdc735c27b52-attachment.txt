@@ -1,2 +1,0 @@
-Senaryo başlatılamadı: Could not start a new session. Unable to parse remote response: DeviceBusy 
-Host info: host: '192.168.1.13', ip: '2a02:ff0:220:aa06:c5b2:f93:12af:2997%en0'

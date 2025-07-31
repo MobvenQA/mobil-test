@@ -176,4 +176,18 @@ public class ConfigManager {
     public static int getPortOffset(int baseOffset) {
         return getDeviceGw() + 4000 + baseOffset;
     }
+    public static String getDefaultAppKey() {
+        String env = getEnvironment();
+        String platform = getPlatform();
+        JSONObject envObj = envConfig.getJSONObject("environments").getJSONObject(env);
+        if (envObj.has("platforms")) {
+            JSONObject platformConfig = envObj.getJSONObject("platforms").getJSONObject(platform);
+            JSONObject apps = platformConfig.optJSONObject("apps");
+            if (apps != null && apps.length() > 0) {
+                // İlk appKey'i döndür
+                return apps.keys().next();
+            }
+        }
+        return null;
+    }
 }

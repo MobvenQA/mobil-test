@@ -1,4 +1,0 @@
-"Status","Start Time","Stop Time","Duration in ms","Parent Suite","Suite","Sub Suite","Test Class","Test Method","Name","Description"
-"broken","Mon Jul 28 22:52:19 UTC 2025","Mon Jul 28 22:52:21 UTC 2025","2145","Mobile Automation Suite - Cloud iOS Parallel","Cloud iOS Device 2","com.flick.runners.TestRunner","com.flick.runners.TestRunner","runScenario","Runs Cucumber Scenarios",""
-"broken","Mon Jul 28 22:52:19 UTC 2025","Mon Jul 28 22:54:05 UTC 2025","105211","Mobile Automation Suite - Cloud iOS Parallel","Cloud iOS Device 3","com.flick.runners.TestRunner","com.flick.runners.TestRunner","runScenario","Runs Cucumber Scenarios",""
-"broken","Mon Jul 28 22:52:19 UTC 2025","Mon Jul 28 22:54:06 UTC 2025","106593","Mobile Automation Suite - Cloud iOS Parallel","Cloud iOS Device 1","com.flick.runners.TestRunner","com.flick.runners.TestRunner","runScenario","Runs Cucumber Scenarios",""

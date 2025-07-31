@@ -2,7 +2,7 @@
 <suite name="Mobile Automation Suite - Cloud iOS" verbose="1" parallel="false">
     <parameter name="environment" value="cloud"/>
     <parameter name="platform" value="ios"/>
-    <parameter name="appKey" value="Sociable"/>
+    <parameter name="appKey" value="Geovision"/>
     <parameter name="deviceIndex" value="0"/>
 
     <test name="iOS Cloud Single Device">

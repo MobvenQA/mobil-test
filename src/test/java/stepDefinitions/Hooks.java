@@ -14,11 +14,24 @@ public class Hooks {
             LoggerHelper.startTestLog(scenario.getName());
             LoggerHelper.log(LogLevel.INFO, "Scenario Başlatıldı: " + scenario.getName());
 
-            // Güvenlik: appKey boşsa (örn. yanlış sırayla çalıştıysa) System prop’tan al
+            // Eğer context yoksa, fallback ile ayarla
             if (ConfigManager.getAppKey() == null || ConfigManager.getAppKey().isEmpty()) {
-                String fallback = System.getProperty("appKey", "");
-                if (!fallback.isEmpty()) {
-                    ConfigManager.setAppKey(fallback);
+                String env = System.getProperty("environment", "local");
+                String platform = System.getProperty("platform", "ios");
+                int deviceIndex = Integer.parseInt(System.getProperty("deviceIndex", "0"));
+                String appKey = System.getProperty("appKey");
+                if (appKey == null || appKey.isEmpty()) {
+                    appKey = ConfigManager.getDefaultAppKey();
+                }
+                ConfigManager.setContext(env, platform, deviceIndex);
+                ConfigManager.setAppKey(appKey);
+            }
+            // Eğer driver yoksa başlat
+            if (DriverFactory.getDriver() == null) {
+                try {
+                    DriverFactory.initDriver();
+                } catch (Exception e) {
+                    throw new RuntimeException("Driver başlatılamadı!", e);
                 }
             }
 
@@ -27,7 +40,6 @@ public class Hooks {
                     + " | Device Index: " + ConfigManager.getDeviceIndex()
                     + " | AppKey: " + ConfigManager.getAppKey());
 
-            DriverFactory.initDriver();
         } catch (Exception e) {
             LoggerHelper.log(LogLevel.ERROR, "Senaryo başlatılamadı: " + e.getMessage());
             throw new RuntimeException("Senaryo başlatma hatası", e);
@@ -37,7 +49,6 @@ public class Hooks {
     @After
     public void afterScenario(Scenario scenario) {
         LoggerHelper.log(LogLevel.INFO, "Senaryo Tamamlandı: " + scenario.getName() + " => " + scenario.getStatus());
-        DriverFactory.quitDriver();
         LoggerHelper.endTestLog(scenario.getName());
     }
 }
