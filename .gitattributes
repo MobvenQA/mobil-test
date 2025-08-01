@@ -1,0 +1,6 @@
+# Java dosyalarını ana dil olarak işaretle
+*.java linguist-language=Java
+
+# JavaScript/HTML dosyalarını dil istatistiklerinden çıkar (opsiyonel)
+*.js linguist-detectable=false
+*.html linguist-detectable=false
