@@ -45,5 +45,5 @@ logs/
 *.ipa
 * logs
 # Kaynaklardaki gizli config
-* src/test/resources/environment.json
-* src/main/resources/environment.json
+/src/main/resources/environment.json
+/src/test/resources/environment.json
