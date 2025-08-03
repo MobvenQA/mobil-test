@@ -83,6 +83,20 @@ mvn clean test -DsuiteXmlFile=TestSuiteXml/iOS/Cloud/testngCloudParallel.xml
 2. Adım tanımlarını (`stepDefinitions`) yazın.
 3. TestNG XML ile çalıştırın – ek bir ayar yapmanıza gerek yoktur, tüm feature dosyaları otomatik olarak dahil edilir.
 
+### Hooks ve Session Yönetimi
+
+Proje otomatik session yönetimi ile gelir:
+- **SuiteHooks**: Her test suite başında driver init ve environment setup
+- **Hooks**: Her scenario için before/after işlemleri
+- **Otomatik Driver Init**: Driver null ise otomatik başlatma
+- **Screenshot ve Logging**: Her adım sonrası otomatik screenshot
+
+### IntelliJ'de Feature Dosyası Çalıştırma
+
+Feature dosyalarını IntelliJ'de doğrudan çalıştırabilirsiniz:
+1. Feature dosyasına sağ tık → "Run 'Feature:01_testFlight'"
+2. Veya `FeatureTestRunner` sınıfını çalıştırın
+
 ---
 
 ## Çalıştırma Senaryoları
@@ -201,8 +215,14 @@ Her proje için ayrı:
 ### S: Tekli ve paralel testler arasında fark var mı?
 **Evet.** Paralel testlerde her test için farklı cihaz ve port atanır, tekli testte tek cihaz kullanılır.
 
+### S: Feature dosyalarımı çalıştırdığımda session başlatmıyor, hooks çalışmıyor?
+**Çözüldü!** Artık `glue = {"stepDefinitions", "hooks"}` ile hooks otomatik çalışır ve session başlatılır.
+
 ### S: Docker olmadan çalışabilir mi?
 **Evet.** Allure raporlarını local olarak da oluşturabilirsiniz, ancak Docker ile daha kolay yönetim sağlanır.
+
+### S: IntelliJ'de feature dosyasını doğrudan çalıştırabilir miyim?
+**Evet.** Feature dosyasına sağ tık → "Run" ile doğrudan çalıştırabilirsiniz.
 
 ---
 
@@ -226,6 +246,21 @@ Her proje için ayrı:
 1. `projects/` klasörü altında yeni proje klasörü oluşturun
 2. `send_result.sh` scriptinde `PROJECT_ID` değişkenini güncelleyin
 3. Proje özel konfigürasyonları ekleyin
+
+### Hooks ve Test Yönetimi
+- Hooks eklemek için `src/test/java/hooks/` klasörüne yeni hook sınıfları eklenebilir
+- Feature dosyaları `src/test/java/features/` klasörüne eklenmelidir
+- TestNG XML dosyaları `TestSuiteXml/` klasöründe organize edilmiştir
+
+## Son Güncellemeler
+
+### v1.1 - Hooks ve Session Yönetimi Düzeltmesi
+- ✅ Hooks çalışmama sorunu çözüldü
+- ✅ Otomatik session başlatma eklendi
+- ✅ Driver init güvenlik kontrolleri eklendi
+- ✅ IntelliJ'de feature dosyası çalıştırma desteği
+- ✅ Cucumber properties düzeltmesi
+- ✅ TestNG XML dosyaları güncellendi
 
 ---
 
