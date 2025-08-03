@@ -1,25 +1,62 @@
 # Mobil Test Otomasyon Projesi
 
 ## Özellikler
-- **Java + Cucumber + TestNG + Appium** tabanlı mobil test otomasyonu
+- **Java 11 + Cucumber + TestNG + Appium** tabanlı mobil test otomasyonu
 - **iOS ve Android** desteği
 - **Local ve Cloud** (MomentumSuite) ortam desteği
 - **Tekli ve Paralel** test koşumu
 - **Port çakışması olmadan** paralel test desteği
 - **Allure raporlama** ve otomatik rapor gönderimi
+- **Docker** entegrasyonu ile Allure raporlama
+- **Proje bazlı** test yönetimi
+- **Hooks ve Session Yönetimi** - Otomatik driver init ve scenario hooks
 
 ---
 
 ## Klasör Yapısı
 
-- `src/main/java/com/flick/`  
-  - `drivers/`: ThreadLocal Appium driver yönetimi
-  - `capabilities/`: Cloud ve local için capability ayarları
-  - `config/`: Ortam, cihaz, app ve port yönetimi
-  - `runners/`: TestNG + Cucumber runner
-- `src/test/java/stepDefinitions/`: Hooks ve test adımları
-- `TestSuiteXml/`: TestNG XML dosyaları (tekli/paralel, local/cloud)
-- `src/main/resources/environment.json`: Cihaz, ortam ve port konfigürasyonu
+```
+mobil-test/
+├── projects/                    # Proje bazlı test yönetimi
+│   ├── default/                # Varsayılan proje
+│   └── madduck/               # Madduck projesi
+├── src/main/java/com/flick/
+│   ├── drivers/               # ThreadLocal Appium driver yönetimi
+│   ├── capabilities/          # Cloud ve local için capability ayarları
+│   ├── config/               # Ortam, cihaz, app ve port yönetimi
+│   ├── pages/                # Page Object Model
+│   ├── runners/              # TestNG + Cucumber runner
+│   └── utils/                # Yardımcı sınıflar
+├── src/test/java/
+│   ├── stepDefinitions/      # Hooks ve test adımları
+│   └── features/            # Cucumber feature dosyaları
+├── TestSuiteXml/            # TestNG XML dosyaları
+│   └── iOS/
+│       ├── Local/           # Local test konfigürasyonları
+│       └── Cloud/           # Cloud test konfigürasyonları
+├── docker-compose.yml       # Docker Allure servisleri
+└── send_result.sh          # Otomatik rapor gönderimi
+```
+
+---
+
+## Kurulum ve Başlangıç
+
+### 1. Gereksinimler
+- Java 11+
+- Maven 3.6+
+- Appium Server
+- iOS Simulator/Device (iOS testleri için)
+- Android Emulator/Device (Android testleri için)
+
+### 2. Konfigürasyon
+1. `src/main/resources/enviroment.example.json` dosyasını `environment.json` olarak kopyalayın
+2. Cihaz bilgilerinizi ve MomentumSuite token'ınızı güncelleyin
+3. Docker Compose ile Allure servislerini başlatın:
+
+```bash
+docker-compose up -d
+```
 
 ---
 
@@ -46,6 +83,20 @@ mvn clean test -DsuiteXmlFile=TestSuiteXml/iOS/Cloud/testngCloudParallel.xml
 1. Yeni bir `.feature` dosyasını `src/test/java/features/` klasörüne ekleyin.
 2. Adım tanımlarını (`stepDefinitions`) yazın.
 3. TestNG XML ile çalıştırın – ek bir ayar yapmanıza gerek yoktur, tüm feature dosyaları otomatik olarak dahil edilir.
+
+### Hooks ve Session Yönetimi
+
+Proje artık otomatik session yönetimi ile gelir:
+- **SuiteHooks**: Her test suite başında driver init ve environment setup
+- **Hooks**: Her scenario için before/after işlemleri
+- **Otomatik Driver Init**: Driver null ise otomatik başlatma
+- **Screenshot ve Logging**: Her adım sonrası otomatik screenshot
+
+### IntelliJ'de Feature Dosyası Çalıştırma
+
+Feature dosyalarını IntelliJ'de doğrudan çalıştırabilirsiniz:
+1. Feature dosyasına sağ tık → "Run 'Feature:01_testFlight'"
+2. Veya `FeatureTestRunner` sınıfını çalıştırın
 
 ---
 
@@ -103,6 +154,9 @@ mvn clean test -DsuiteXmlFile=TestSuiteXml/iOS/Cloud/testngCloudParallel.xml
 
 ## Sıkça Sorulanlar
 
+### S: Feature dosyalarımı çalıştırdığımda session başlatmıyor, hooks çalışmıyor?
+**Çözüldü!** Artık `glue = {"stepDefinitions", "hooks"}` ile hooks otomatik çalışır ve session başlatılır.
+
 ### S: Paralel cloud testte port çakışması olur mu?
 **Hayır.** Her cihaz için farklı `gw` ve offset ile portlar atanır, çakışma yaşanmaz.
 
@@ -112,6 +166,9 @@ mvn clean test -DsuiteXmlFile=TestSuiteXml/iOS/Cloud/testngCloudParallel.xml
 ### S: Tekli ve paralel testler arasında fark var mı?
 **Evet.** Paralel testlerde her test için farklı cihaz ve port atanır, tekli testte tek cihaz kullanılır.
 
+### S: IntelliJ'de feature dosyasını doğrudan çalıştırabilir miyim?
+**Evet.** Feature dosyasına sağ tık → "Run" ile doğrudan çalıştırabilirsiniz.
+
 ---
 
 ## Geliştirici Notları
@@ -119,6 +176,19 @@ mvn clean test -DsuiteXmlFile=TestSuiteXml/iOS/Cloud/testngCloudParallel.xml
 - Yeni cihaz eklemek için environment.json'a cihaz bilgisi ve gw portu eklenmelidir.
 - Yeni app eklemek için ilgili platform altında apps objesine ekleme yapılmalıdır.
 - Cloud ortamı için MomentumSuite kullanıcı ve token bilgisi güncellenmelidir.
+- Hooks eklemek için `src/test/java/hooks/` klasörüne yeni hook sınıfları eklenebilir.
+- Feature dosyaları `src/test/java/features/` klasörüne eklenmelidir.
+- TestNG XML dosyaları `TestSuiteXml/` klasöründe organize edilmiştir.
+
+## Son Güncellemeler
+
+### v1.1 - Hooks ve Session Yönetimi Düzeltmesi
+- ✅ Hooks çalışmama sorunu çözüldü
+- ✅ Otomatik session başlatma eklendi
+- ✅ Driver init güvenlik kontrolleri eklendi
+- ✅ IntelliJ'de feature dosyası çalıştırma desteği
+- ✅ Cucumber properties düzeltmesi
+- ✅ TestNG XML dosyaları güncellendi
 
 ---
 
