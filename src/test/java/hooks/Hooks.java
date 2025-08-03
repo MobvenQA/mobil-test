@@ -16,8 +16,20 @@ public class Hooks {
         LoggerHelper.log(LogLevel.INFO, "Scenario START: " + scenario.getName());
         Allure.step("Scenario START: " + scenario.getName());
 
+        // Driver'ın hazır olduğundan emin ol
+        if (DriverFactory.getDriver() == null) {
+            LoggerHelper.log(LogLevel.WARN, "Driver not initialized, attempting to initialize...");
+            try {
+                DriverFactory.initDriver();
+            } catch (Exception e) {
+                LoggerHelper.log(LogLevel.ERROR, "Failed to initialize driver: " + e.getMessage());
+            }
+        }
+
         // TestFlight izin ekranlarını senaryo başında temizle
-        new TestFlightPage().handlePermissions();
+        if (DriverFactory.getDriver() != null) {
+            new TestFlightPage().handlePermissions();
+        }
     }
 
     @After

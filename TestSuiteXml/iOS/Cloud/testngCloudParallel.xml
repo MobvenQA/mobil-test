@@ -2,7 +2,7 @@
 <suite name="Cloud iOS - Parallel" parallel="tests" thread-count="6" preserve-order="true">
     <parameter name="environment" value="cloud"/>
     <parameter name="platform" value="ios"/>
-    <parameter name="appKey" value="Playdate"/>
+    <parameter name="appKey" value="Geovision"/>
     <listeners>
         <listener class-name="io.qameta.allure.testng.AllureTestNg" />
     </listeners>

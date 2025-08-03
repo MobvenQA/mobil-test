@@ -43,7 +43,13 @@ public class SuiteHooks {
         LoggerHelper.log(LogLevel.INFO, "Tags=" + System.getProperty("cucumber.filter.tags", "(none)"));
         LoggerHelper.log(LogLevel.INFO, "================================");
 
-        DriverFactory.initDriver();
+        // Driver'ı sadece henüz başlatılmamışsa başlat
+        if (DriverFactory.getDriver() == null) {
+            DriverFactory.initDriver();
+            LoggerHelper.log(LogLevel.INFO, "Driver initialized successfully");
+        } else {
+            LoggerHelper.log(LogLevel.INFO, "Driver already initialized, skipping...");
+        }
     }
 
     /**

@@ -62,7 +62,7 @@
         <version>7.14.0</version>
         <scope>test</scope>
       </dependency>
-      <!-- Cucumber TestNG (Eksik olan bu!) -->
+      <!-- Cucumber TestNG -->
       <dependency>
           <groupId>io.cucumber</groupId>
           <artifactId>cucumber-testng</artifactId>
@@ -73,7 +73,7 @@
       <dependency>
           <groupId>org.testng</groupId>
           <artifactId>testng</artifactId>
-          <version>6.14.3</version>
+          <version>7.8.0</version>
           <scope>test</scope>
       </dependency>
 
@@ -91,12 +91,7 @@
         <artifactId>json</artifactId>
         <version>20231013</version>
       </dependency>
-      <dependency>
-          <groupId>io.cucumber</groupId>
-          <artifactId>cucumber-testng</artifactId>
-          <version>7.14.0</version>
-          <scope>compile</scope>
-      </dependency>
+      <!-- Duplicate dependency removed -->
       <!-- Allure -->
       <dependency>
           <groupId>io.qameta.allure</groupId>
@@ -109,12 +104,7 @@
           <version>2.24.0</version>
           <scope>test</scope>
       </dependency>
-      <dependency>
-          <groupId>org.testng</groupId>
-          <artifactId>testng</artifactId>
-          <version>7.8.0</version>
-          <scope>compile</scope>
-      </dependency>
+      <!-- Duplicate TestNG dependency removed -->
       <dependency>
           <groupId>com.squareup.okhttp3</groupId>
           <artifactId>okhttp</artifactId>
@@ -130,6 +120,18 @@
           <groupId>com.aventstack</groupId>
           <artifactId>extentreports</artifactId>
           <version>5.1.1</version> <!-- ExtentReports core -->
+      </dependency>
+      <dependency>
+          <groupId>io.cucumber</groupId>
+          <artifactId>cucumber-testng</artifactId>
+          <version>7.14.0</version>
+          <scope>compile</scope>
+      </dependency>
+      <dependency>
+          <groupId>org.testng</groupId>
+          <artifactId>testng</artifactId>
+          <version>7.8.0</version>
+          <scope>compile</scope>
       </dependency>
 
   </dependencies><build>

@@ -11,4 +11,4 @@ Feature: TestFlight üzerinden uygulama kurulumu ve açılışı
 
     Examples:
       | appKey                  | bundleId               | targetBundleId     |
-      | Call recorder - Rink  | com.apple.TestFlight   | com.madduck.callrecorder   |
+      | Geovision  | com.apple.TestFlight   | com.madduck.geovs   |

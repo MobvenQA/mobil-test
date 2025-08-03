@@ -1,0 +1,2 @@
+Driver başlatılamadı: Could not start a new session. Unable to parse remote response: DeviceBusy 
+Host info: host: 'hakan.local', ip: '2a02:ff0:220:aa06:95ea:955c:bb17:eb99%en0'

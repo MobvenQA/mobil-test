@@ -1,0 +1,1 @@
+Scenario Başlatıldı: Kullanıcı onboarding akışını tamamlar ve uygulamayı açar

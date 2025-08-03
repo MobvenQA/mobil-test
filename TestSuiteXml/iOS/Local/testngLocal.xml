@@ -3,7 +3,7 @@
 <suite name="Local iOS - Sequential" parallel="false" verbose="1" preserve-order="true">
     <parameter name="environment" value="local"/>
     <parameter name="platform" value="ios"/>
-    <parameter name="appKey" value="Callrecorder"/>
+    <parameter name="appKey" value="Geovision"/>
     <parameter name="deviceIndex" value="0"/>
     <listeners>
         <listener class-name="io.qameta.allure.testng.AllureTestNg" />

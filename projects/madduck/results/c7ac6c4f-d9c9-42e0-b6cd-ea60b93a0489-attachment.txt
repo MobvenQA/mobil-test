@@ -1,0 +1,7 @@
+❌ removeAppPhones işlemi başarısız: ❌ Süre içinde tıklanabilir element bulunamadı. Denenen locator'lar:
+ - By.xpath: (//*[contains(@name,'Edit') or contains(@label,'Edit') or contains(@value,'Edit')])[2]
+ - By.xpath: (//*[contains(@name,'Edit') or contains(@label,'Edit') or contains(@value,'Edit')])[1]
+ - AppiumBy.accessibilityId: Edit Button
+Build info: version: '4.15.0', revision: '1d14b5521b'
+System info: os.name: 'Mac OS X', os.arch: 'x86_64', os.version: '13.5.2', java.version: '11.0.15.1'
+Driver info: driver.version: unknown
